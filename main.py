@@ -9,7 +9,7 @@ from database import GestorBaseDatos
 from interfaces.Empleados import GestionEmpleados 
 from interfaces.Usuario import GestionUsuarios
 from interfaces.Clientes import GestionClientes
-from interfaces.Productos import GestionProductos  # <--- Corregido: Importa GestionProductos
+from interfaces.Productos import GestionProductos 
 from interfaces.Pedidos import GestionPedidos
 
 class VentanaLogin(QtWidgets.QMainWindow):
@@ -23,7 +23,7 @@ class VentanaLogin(QtWidgets.QMainWindow):
         self.ui.btnIngresar.clicked.connect(self.verificar_login)
 
     def verificar_login(self):
-        # 1. Obtenemos el texto de los QLineEdit de tu login (ajusta si tus nombres son distintos)
+        # Obtenemos el texto de los QLineEdit de tu login 
         usuario_ingresado = self.ui.txtUsuario.text().strip()
         contrasena_ingresada = self.ui.txtContrasena.text().strip()
 
@@ -34,7 +34,7 @@ class VentanaLogin(QtWidgets.QMainWindow):
         try:
             with self.db.conectar() as conexion:
                 cursor = conexion.cursor()
-                # 2. Realizamos el SELECT haciendo JOIN con empleados para traer los nombres y el rol
+                #  Realizamos el SELECT haciendo JOIN con empleados para traer los nombres y el rol
                 cursor.execute("""
                     SELECT u.id, u.usuario, u.contrasena, u.rol, u.dni, e.nombres, e.apellidos 
                     FROM usuarios u 
@@ -45,7 +45,7 @@ class VentanaLogin(QtWidgets.QMainWindow):
                 resultado = cursor.fetchone()
 
             if resultado:
-                rol_usuario = resultado[3]     # El rol para los permisos (Ej: 'Administrador')
+                rol_usuario = resultado[3]     # El rol para los permisos
                 nombres_emp = resultado[5]     # Nombres del empleado
                 apellidos_emp = resultado[6]   # Apellidos del empleado
                 
@@ -55,7 +55,7 @@ class VentanaLogin(QtWidgets.QMainWindow):
                 else:
                     nombre_completo = f"{nombres_emp} {apellidos_emp}"
                 
-                # 3. Abrimos el dashboard pasándole el rol y el nombre completo
+                #  Abrimos el dashboard pasándole el rol y el nombre completo
                 self.dashboard = VentanaDashboard(rol_usuario, nombre_completo)
                 self.dashboard.show()
                 self.close()
@@ -71,10 +71,10 @@ class VentanaDashboard(QtWidgets.QMainWindow):
         self.ui = Ui_Dashboard()
         self.ui.setupUi(self)
 
-        # 1. Declaramos el atributo para evitar el error de 'rol_actual'
+        # 1Declaramos el atributo para evitar el error de 'rol_actual'
         self.rol_actual = rol_usuario
         
-        # 2. Mostramos el nombre real de la persona en lugar del rol
+        #  Mostramos el nombre 
         self.ui.lblUsuario.setText(f"USUARIO: {nombre_usuario}")
         
         # Página de inicio por defecto
@@ -136,7 +136,6 @@ class VentanaDashboard(QtWidgets.QMainWindow):
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     
-    # Iniciamos mostrando la ventana de Login
     login = VentanaLogin()
     login.show()
     

@@ -10,19 +10,19 @@ class GestionEmpleados:
         self.ui.tableEmpleados.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
         self.ui.tableEmpleados.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
         
-        # 1. Configurar ComboBox
+        #  Configurar ComboBox
         self.configurar_comboboxes()
         
-        # 2. Conectar botones
+        #  Conectar botones
         self.ui.btnGuardarEmp.clicked.connect(self.agregar_empleado)
         self.ui.btnEditarEmp.clicked.connect(self.modificar_empleado)
         self.ui.btnEliminarEmp.clicked.connect(self.eliminar_empleado)
         self.ui.btnNuevoEmp.clicked.connect(self.limpiar_campos)
         
-        # 3. Detectar cuando el usuario hace clic en una fila de la tabla
+        #  Detectar cuando el usuario hace clic en una fila de la tabla
         self.ui.tableEmpleados.cellClicked.connect(self.seleccionar_empleado)
         
-        # 4. Cargar datos en la tabla al iniciar
+        # Cargar datos en la tabla al iniciar
         self.cargar_empleados()
 
     def configurar_comboboxes(self):

@@ -6,10 +6,10 @@ class GestionClientes:
         self.ui = ui_dashboard
         self.db = GestorBaseDatos()
         
-        # Asegurar que la tabla de clientes exista en la base de datos
+        # Asegurar que la tabla de clientes exista 
         self.crear_tabla_clientes_si_no_existe()
         
-        # Detectar el nombre de la tabla (por si en tu UI se llama 'tableClientes' o 'clientes')
+        # Detectar el nombre de la tabla 
         self.tabla = getattr(self.ui, "tableClientes", getattr(self.ui, "clientes", None))
         
         if self.tabla:
@@ -87,7 +87,7 @@ class GestionClientes:
         telefono = self.ui.txtRelefonoCli.text().strip() if hasattr(self.ui, "txtRelefonoCli") else ""
         direccion = self.ui.txtDireccionCli.text().strip() if hasattr(self.ui, "txtDireccionCli") else ""
 
-        print(f"👉 [DEBUG CLIENTE] Intentando guardar -> Doc: {documento} | Nombre: {nombre}")
+        print(f"[DEBUG CLIENTE] Intentando guardar -> Doc: {documento} | Nombre: {nombre}")
 
         if not documento or not nombre:
             QtWidgets.QMessageBox.warning(self.ui.centralwidget, "Campos incompletos", "El número de Documento y el Nombre/Razón Social son obligatorios.")
@@ -102,12 +102,12 @@ class GestionClientes:
                 """, (documento, nombre, telefono, direccion))
                 conexion.commit()
 
-            print("✅ [DEBUG CLIENTE] ¡Guardado exitosamente en la BD!")
+            print(" [DEBUG CLIENTE] ¡Guardado exitosamente en la BD!")
             QtWidgets.QMessageBox.information(self.ui.centralwidget, "Éxito", "Cliente registrado correctamente.")
             self.cargar_clientes()
             self.limpiar_campos_cliente()
         except Exception as e:
-            print(f"❌ [ERROR AL GUARDAR CLIENTE]: {e}")
+            print(f" [ERROR AL GUARDAR CLIENTE]: {e}")
             QtWidgets.QMessageBox.critical(self.ui.centralwidget, "Error", f"No se pudo registrar: {e}")
 
     def seleccionar_cliente(self, row, column):

@@ -41,190 +41,6 @@ class Ui_MainWindow(object):
         self.frameMenu.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frameMenu.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frameMenu.setObjectName("frameMenu")
-        self.btnInicio = QtWidgets.QPushButton(parent=self.frameMenu)
-        self.btnInicio.setGeometry(QtCore.QRect(10, 40, 121, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.btnInicio.setFont(font)
-        self.btnInicio.setStyleSheet("QPushButton {\n"
-"    background-color: transparent; /* Fondo transparente */\n"
-"    color: #ECF0F1;                /* Texto blanco/gris claro */\n"
-"    border: none;\n"
-"    text-align: left;\n"
-"    padding: 8px 15px;\n"
-"    font-weight: bold;\n"
-"}\n"
-"\n"
-"/* Efecto al pasar el mouse por encima */\n"
-"QPushButton:hover {\n"
-"    background-color: #34495E;     /* Se ilumina en azul/gris */\n"
-"    color: #E67E22;                /* Texto cambia a naranja */\n"
-"    border-radius: 4px;\n"
-"}")
-        self.btnInicio.setObjectName("btnInicio")
-        self.btnUsuario = QtWidgets.QPushButton(parent=self.frameMenu)
-        self.btnUsuario.setGeometry(QtCore.QRect(10, 80, 121, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.btnUsuario.setFont(font)
-        self.btnUsuario.setStyleSheet("QPushButton {\n"
-"    background-color: transparent; /* Fondo transparente */\n"
-"    color: #ECF0F1;                /* Texto blanco/gris claro */\n"
-"    border: none;\n"
-"    text-align: left;\n"
-"    padding: 8px 15px;\n"
-"    font-weight: bold;\n"
-"}\n"
-"\n"
-"/* Efecto al pasar el mouse por encima */\n"
-"QPushButton:hover {\n"
-"    background-color: #34495E;     /* Se ilumina en azul/gris */\n"
-"    color: #E67E22;                /* Texto cambia a naranja */\n"
-"    border-radius: 4px;\n"
-"}")
-        self.btnUsuario.setObjectName("btnUsuario")
-        self.btnEmpleados = QtWidgets.QPushButton(parent=self.frameMenu)
-        self.btnEmpleados.setGeometry(QtCore.QRect(10, 120, 121, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.btnEmpleados.setFont(font)
-        self.btnEmpleados.setStyleSheet("QPushButton {\n"
-"    background-color: transparent; /* Fondo transparente */\n"
-"    color: #ECF0F1;                /* Texto blanco/gris claro */\n"
-"    border: none;\n"
-"    text-align: left;\n"
-"    padding: 8px 15px;\n"
-"    font-weight: bold;\n"
-"}\n"
-"\n"
-"/* Efecto al pasar el mouse por encima */\n"
-"QPushButton:hover {\n"
-"    background-color: #34495E;     /* Se ilumina en azul/gris */\n"
-"    color: #E67E22;                /* Texto cambia a naranja */\n"
-"    border-radius: 4px;\n"
-"}")
-        self.btnEmpleados.setObjectName("btnEmpleados")
-        self.btnClientes = QtWidgets.QPushButton(parent=self.frameMenu)
-        self.btnClientes.setGeometry(QtCore.QRect(10, 160, 121, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.btnClientes.setFont(font)
-        self.btnClientes.setStyleSheet("QPushButton {\n"
-"    background-color: transparent; /* Fondo transparente */\n"
-"    color: #ECF0F1;                /* Texto blanco/gris claro */\n"
-"    border: none;\n"
-"    text-align: left;\n"
-"    padding: 8px 15px;\n"
-"    font-weight: bold;\n"
-"}\n"
-"\n"
-"/* Efecto al pasar el mouse por encima */\n"
-"QPushButton:hover {\n"
-"    background-color: #34495E;     /* Se ilumina en azul/gris */\n"
-"    color: #E67E22;                /* Texto cambia a naranja */\n"
-"    border-radius: 4px;\n"
-"}")
-        self.btnClientes.setObjectName("btnClientes")
-        self.btnProductos = QtWidgets.QPushButton(parent=self.frameMenu)
-        self.btnProductos.setGeometry(QtCore.QRect(10, 200, 121, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.btnProductos.setFont(font)
-        self.btnProductos.setStyleSheet("QPushButton {\n"
-"    background-color: transparent; /* Fondo transparente */\n"
-"    color: #ECF0F1;                /* Texto blanco/gris claro */\n"
-"    border: none;\n"
-"    text-align: left;\n"
-"    padding: 8px 15px;\n"
-"    font-weight: bold;\n"
-"}\n"
-"\n"
-"/* Efecto al pasar el mouse por encima */\n"
-"QPushButton:hover {\n"
-"    background-color: #34495E;     /* Se ilumina en azul/gris */\n"
-"    color: #E67E22;                /* Texto cambia a naranja */\n"
-"    border-radius: 4px;\n"
-"}")
-        self.btnProductos.setObjectName("btnProductos")
-        self.btnInsumos = QtWidgets.QPushButton(parent=self.frameMenu)
-        self.btnInsumos.setGeometry(QtCore.QRect(10, 240, 121, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.btnInsumos.setFont(font)
-        self.btnInsumos.setStyleSheet("QPushButton {\n"
-"    background-color: transparent; /* Fondo transparente */\n"
-"    color: #ECF0F1;                /* Texto blanco/gris claro */\n"
-"    border: none;\n"
-"    text-align: left;\n"
-"    padding: 8px 15px;\n"
-"    font-weight: bold;\n"
-"}\n"
-"\n"
-"/* Efecto al pasar el mouse por encima */\n"
-"QPushButton:hover {\n"
-"    background-color: #34495E;     /* Se ilumina en azul/gris */\n"
-"    color: #E67E22;                /* Texto cambia a naranja */\n"
-"    border-radius: 4px;\n"
-"}")
-        self.btnInsumos.setObjectName("btnInsumos")
-        self.btnPedidos = QtWidgets.QPushButton(parent=self.frameMenu)
-        self.btnPedidos.setGeometry(QtCore.QRect(10, 280, 131, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.btnPedidos.setFont(font)
-        self.btnPedidos.setStyleSheet("QPushButton {\n"
-"    background-color: transparent; /* Fondo transparente */\n"
-"    color: #ECF0F1;                /* Texto blanco/gris claro */\n"
-"    border: none;\n"
-"    text-align: left;\n"
-"    padding: 8px 15px;\n"
-"    font-weight: bold;\n"
-"}\n"
-"\n"
-"/* Efecto al pasar el mouse por encima */\n"
-"QPushButton:hover {\n"
-"    background-color: #34495E;     /* Se ilumina en azul/gris */\n"
-"    color: #E67E22;                /* Texto cambia a naranja */\n"
-"    border-radius: 4px;\n"
-"}")
-        self.btnPedidos.setObjectName("btnPedidos")
-        self.btnReportes = QtWidgets.QPushButton(parent=self.frameMenu)
-        self.btnReportes.setGeometry(QtCore.QRect(10, 320, 121, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.btnReportes.setFont(font)
-        self.btnReportes.setStyleSheet("QPushButton {\n"
-"    background-color: transparent; /* Fondo transparente */\n"
-"    color: #ECF0F1;                /* Texto blanco/gris claro */\n"
-"    border: none;\n"
-"    text-align: left;\n"
-"    padding: 8px 15px;\n"
-"    font-weight: bold;\n"
-"}\n"
-"\n"
-"/* Efecto al pasar el mouse por encima */\n"
-"QPushButton:hover {\n"
-"    background-color: #34495E;     /* Se ilumina en azul/gris */\n"
-"    color: #E67E22;                /* Texto cambia a naranja */\n"
-"    border-radius: 4px;\n"
-"}")
-        self.btnReportes.setObjectName("btnReportes")
         self.btnCerrarsesion = QtWidgets.QPushButton(parent=self.frameMenu)
         self.btnCerrarsesion.setGeometry(QtCore.QRect(0, 500, 141, 35))
         font = QtGui.QFont()
@@ -256,6 +72,198 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.label.setFont(font)
         self.label.setObjectName("label")
+        self.verticalLayoutWidget = QtWidgets.QWidget(parent=self.frameMenu)
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 50, 141, 322))
+        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.btnInicio = QtWidgets.QPushButton(parent=self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.btnInicio.setFont(font)
+        self.btnInicio.setStyleSheet("QPushButton {\n"
+"    background-color: transparent; /* Fondo transparente */\n"
+"    color: #ECF0F1;                /* Texto blanco/gris claro */\n"
+"    border: none;\n"
+"    text-align: left;\n"
+"    padding: 8px 15px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"/* Efecto al pasar el mouse por encima */\n"
+"QPushButton:hover {\n"
+"    background-color: #34495E;     /* Se ilumina en azul/gris */\n"
+"    color: #E67E22;                /* Texto cambia a naranja */\n"
+"    border-radius: 4px;\n"
+"}")
+        self.btnInicio.setObjectName("btnInicio")
+        self.verticalLayout_2.addWidget(self.btnInicio)
+        self.btnUsuario = QtWidgets.QPushButton(parent=self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.btnUsuario.setFont(font)
+        self.btnUsuario.setStyleSheet("QPushButton {\n"
+"    background-color: transparent; /* Fondo transparente */\n"
+"    color: #ECF0F1;                /* Texto blanco/gris claro */\n"
+"    border: none;\n"
+"    text-align: left;\n"
+"    padding: 8px 15px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"/* Efecto al pasar el mouse por encima */\n"
+"QPushButton:hover {\n"
+"    background-color: #34495E;     /* Se ilumina en azul/gris */\n"
+"    color: #E67E22;                /* Texto cambia a naranja */\n"
+"    border-radius: 4px;\n"
+"}")
+        self.btnUsuario.setObjectName("btnUsuario")
+        self.verticalLayout_2.addWidget(self.btnUsuario)
+        self.btnEmpleados = QtWidgets.QPushButton(parent=self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.btnEmpleados.setFont(font)
+        self.btnEmpleados.setStyleSheet("QPushButton {\n"
+"    background-color: transparent; /* Fondo transparente */\n"
+"    color: #ECF0F1;                /* Texto blanco/gris claro */\n"
+"    border: none;\n"
+"    text-align: left;\n"
+"    padding: 8px 15px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"/* Efecto al pasar el mouse por encima */\n"
+"QPushButton:hover {\n"
+"    background-color: #34495E;     /* Se ilumina en azul/gris */\n"
+"    color: #E67E22;                /* Texto cambia a naranja */\n"
+"    border-radius: 4px;\n"
+"}")
+        self.btnEmpleados.setObjectName("btnEmpleados")
+        self.verticalLayout_2.addWidget(self.btnEmpleados)
+        self.btnClientes = QtWidgets.QPushButton(parent=self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.btnClientes.setFont(font)
+        self.btnClientes.setStyleSheet("QPushButton {\n"
+"    background-color: transparent; /* Fondo transparente */\n"
+"    color: #ECF0F1;                /* Texto blanco/gris claro */\n"
+"    border: none;\n"
+"    text-align: left;\n"
+"    padding: 8px 15px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"/* Efecto al pasar el mouse por encima */\n"
+"QPushButton:hover {\n"
+"    background-color: #34495E;     /* Se ilumina en azul/gris */\n"
+"    color: #E67E22;                /* Texto cambia a naranja */\n"
+"    border-radius: 4px;\n"
+"}")
+        self.btnClientes.setObjectName("btnClientes")
+        self.verticalLayout_2.addWidget(self.btnClientes)
+        self.btnProductos = QtWidgets.QPushButton(parent=self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.btnProductos.setFont(font)
+        self.btnProductos.setStyleSheet("QPushButton {\n"
+"    background-color: transparent; /* Fondo transparente */\n"
+"    color: #ECF0F1;                /* Texto blanco/gris claro */\n"
+"    border: none;\n"
+"    text-align: left;\n"
+"    padding: 8px 15px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"/* Efecto al pasar el mouse por encima */\n"
+"QPushButton:hover {\n"
+"    background-color: #34495E;     /* Se ilumina en azul/gris */\n"
+"    color: #E67E22;                /* Texto cambia a naranja */\n"
+"    border-radius: 4px;\n"
+"}")
+        self.btnProductos.setObjectName("btnProductos")
+        self.verticalLayout_2.addWidget(self.btnProductos)
+        self.btnInsumos = QtWidgets.QPushButton(parent=self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.btnInsumos.setFont(font)
+        self.btnInsumos.setStyleSheet("QPushButton {\n"
+"    background-color: transparent; /* Fondo transparente */\n"
+"    color: #ECF0F1;                /* Texto blanco/gris claro */\n"
+"    border: none;\n"
+"    text-align: left;\n"
+"    padding: 8px 15px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"/* Efecto al pasar el mouse por encima */\n"
+"QPushButton:hover {\n"
+"    background-color: #34495E;     /* Se ilumina en azul/gris */\n"
+"    color: #E67E22;                /* Texto cambia a naranja */\n"
+"    border-radius: 4px;\n"
+"}")
+        self.btnInsumos.setObjectName("btnInsumos")
+        self.verticalLayout_2.addWidget(self.btnInsumos)
+        self.btnPedidos = QtWidgets.QPushButton(parent=self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.btnPedidos.setFont(font)
+        self.btnPedidos.setStyleSheet("QPushButton {\n"
+"    background-color: transparent; /* Fondo transparente */\n"
+"    color: #ECF0F1;                /* Texto blanco/gris claro */\n"
+"    border: none;\n"
+"    text-align: left;\n"
+"    padding: 8px 15px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"/* Efecto al pasar el mouse por encima */\n"
+"QPushButton:hover {\n"
+"    background-color: #34495E;     /* Se ilumina en azul/gris */\n"
+"    color: #E67E22;                /* Texto cambia a naranja */\n"
+"    border-radius: 4px;\n"
+"}")
+        self.btnPedidos.setObjectName("btnPedidos")
+        self.verticalLayout_2.addWidget(self.btnPedidos)
+        self.btnReportes = QtWidgets.QPushButton(parent=self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.btnReportes.setFont(font)
+        self.btnReportes.setStyleSheet("QPushButton {\n"
+"    background-color: transparent; /* Fondo transparente */\n"
+"    color: #ECF0F1;                /* Texto blanco/gris claro */\n"
+"    border: none;\n"
+"    text-align: left;\n"
+"    padding: 8px 15px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"/* Efecto al pasar el mouse por encima */\n"
+"QPushButton:hover {\n"
+"    background-color: #34495E;     /* Se ilumina en azul/gris */\n"
+"    color: #E67E22;                /* Texto cambia a naranja */\n"
+"    border-radius: 4px;\n"
+"}")
+        self.btnReportes.setObjectName("btnReportes")
+        self.verticalLayout_2.addWidget(self.btnReportes)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_2.addItem(spacerItem)
         self.StackedWidget = QtWidgets.QStackedWidget(parent=self.frame)
         self.StackedWidget.setGeometry(QtCore.QRect(150, 0, 801, 541))
         self.StackedWidget.setStyleSheet("QTableWidget {\n"
@@ -874,7 +882,7 @@ class Ui_MainWindow(object):
 "    font-weight: bold;\n"
 "}")
         self.tableUsuario.setObjectName("tableUsuario")
-        self.tableUsuario.setColumnCount(6)
+        self.tableUsuario.setColumnCount(5)
         self.tableUsuario.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tableUsuario.setHorizontalHeaderItem(0, item)
@@ -886,8 +894,7 @@ class Ui_MainWindow(object):
         self.tableUsuario.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableUsuario.setHorizontalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableUsuario.setHorizontalHeaderItem(5, item)
+        self.tableUsuario.horizontalHeader().setDefaultSectionSize(111)
         self.tableUsuario.horizontalHeader().setStretchLastSection(True)
         self.StackedWidget.addWidget(self.pageUsuario)
         self.pageEmpleados = QtWidgets.QWidget()
@@ -1740,31 +1747,31 @@ class Ui_MainWindow(object):
         self.lblPedidos.setFont(font)
         self.lblPedidos.setObjectName("lblPedidos")
         self.lblMesaP = QtWidgets.QLabel(parent=self.pagePedido)
-        self.lblMesaP.setGeometry(QtCore.QRect(60, 60, 101, 16))
+        self.lblMesaP.setGeometry(QtCore.QRect(40, 70, 101, 16))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.lblMesaP.setFont(font)
         self.lblMesaP.setObjectName("lblMesaP")
         self.lblDNIP = QtWidgets.QLabel(parent=self.pagePedido)
-        self.lblDNIP.setGeometry(QtCore.QRect(80, 90, 81, 16))
+        self.lblDNIP.setGeometry(QtCore.QRect(70, 120, 81, 16))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.lblDNIP.setFont(font)
         self.lblDNIP.setObjectName("lblDNIP")
         self.lblProductoP = QtWidgets.QLabel(parent=self.pagePedido)
-        self.lblProductoP.setGeometry(QtCore.QRect(100, 120, 61, 16))
+        self.lblProductoP.setGeometry(QtCore.QRect(90, 150, 61, 16))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.lblProductoP.setFont(font)
         self.lblProductoP.setObjectName("lblProductoP")
         self.lblCantidadP = QtWidgets.QLabel(parent=self.pagePedido)
-        self.lblCantidadP.setGeometry(QtCore.QRect(100, 150, 71, 20))
+        self.lblCantidadP.setGeometry(QtCore.QRect(90, 180, 71, 20))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.lblCantidadP.setFont(font)
         self.lblCantidadP.setObjectName("lblCantidadP")
         self.btnAgregarP = QtWidgets.QPushButton(parent=self.pagePedido)
-        self.btnAgregarP.setGeometry(QtCore.QRect(144, 200, 151, 31))
+        self.btnAgregarP.setGeometry(QtCore.QRect(114, 230, 151, 31))
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
@@ -1788,16 +1795,8 @@ class Ui_MainWindow(object):
 "    background-color: #145A32;\n"
 "}")
         self.btnAgregarP.setObjectName("btnAgregarP")
-        self.txtMesaP = QtWidgets.QLineEdit(parent=self.pagePedido)
-        self.txtMesaP.setGeometry(QtCore.QRect(170, 60, 141, 20))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.txtMesaP.setFont(font)
-        self.txtMesaP.setStyleSheet("background-color: #ffffff;\n"
-"")
-        self.txtMesaP.setObjectName("txtMesaP")
         self.txtDNIP = QtWidgets.QLineEdit(parent=self.pagePedido)
-        self.txtDNIP.setGeometry(QtCore.QRect(170, 90, 141, 20))
+        self.txtDNIP.setGeometry(QtCore.QRect(160, 120, 141, 20))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.txtDNIP.setFont(font)
@@ -1805,17 +1804,17 @@ class Ui_MainWindow(object):
 "")
         self.txtDNIP.setObjectName("txtDNIP")
         self.spinCantidadP = QtWidgets.QSpinBox(parent=self.pagePedido)
-        self.spinCantidadP.setGeometry(QtCore.QRect(170, 150, 81, 22))
+        self.spinCantidadP.setGeometry(QtCore.QRect(160, 180, 81, 22))
         self.spinCantidadP.setStyleSheet("background-color: #ffffff;\n"
 "")
         self.spinCantidadP.setObjectName("spinCantidadP")
         self.cmbProductoP = QtWidgets.QComboBox(parent=self.pagePedido)
-        self.cmbProductoP.setGeometry(QtCore.QRect(170, 120, 211, 22))
+        self.cmbProductoP.setGeometry(QtCore.QRect(160, 150, 211, 22))
         self.cmbProductoP.setStyleSheet("background-color: #ffffff;\n"
 "")
         self.cmbProductoP.setObjectName("cmbProductoP")
         self.tablePedidos = QtWidgets.QTableWidget(parent=self.pagePedido)
-        self.tablePedidos.setGeometry(QtCore.QRect(30, 250, 511, 192))
+        self.tablePedidos.setGeometry(QtCore.QRect(30, 270, 511, 192))
         self.tablePedidos.setStyleSheet("QTableWidget {\n"
 "    background-color: #ffffff;\n"
 "    alternate-background-color: #f9f9f9;\n"
@@ -1847,7 +1846,7 @@ class Ui_MainWindow(object):
         self.tablePedidos.setHorizontalHeaderItem(4, item)
         self.tablePedidos.horizontalHeader().setStretchLastSection(True)
         self.btnNuevoP = QtWidgets.QPushButton(parent=self.pagePedido)
-        self.btnNuevoP.setGeometry(QtCore.QRect(100, 470, 111, 31))
+        self.btnNuevoP.setGeometry(QtCore.QRect(90, 490, 111, 31))
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
@@ -1872,7 +1871,7 @@ class Ui_MainWindow(object):
 "}")
         self.btnNuevoP.setObjectName("btnNuevoP")
         self.btnGuardarP = QtWidgets.QPushButton(parent=self.pagePedido)
-        self.btnGuardarP.setGeometry(QtCore.QRect(230, 470, 121, 31))
+        self.btnGuardarP.setGeometry(QtCore.QRect(220, 490, 121, 31))
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
@@ -1897,7 +1896,7 @@ class Ui_MainWindow(object):
 "}")
         self.btnGuardarP.setObjectName("btnGuardarP")
         self.btnImprimirP = QtWidgets.QPushButton(parent=self.pagePedido)
-        self.btnImprimirP.setGeometry(QtCore.QRect(370, 470, 141, 31))
+        self.btnImprimirP.setGeometry(QtCore.QRect(360, 490, 141, 31))
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
@@ -1922,7 +1921,7 @@ class Ui_MainWindow(object):
 "}")
         self.btnImprimirP.setObjectName("btnImprimirP")
         self.btnQuitarP = QtWidgets.QPushButton(parent=self.pagePedido)
-        self.btnQuitarP.setGeometry(QtCore.QRect(320, 200, 141, 31))
+        self.btnQuitarP.setGeometry(QtCore.QRect(290, 230, 141, 31))
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
@@ -1947,13 +1946,13 @@ class Ui_MainWindow(object):
 "}")
         self.btnQuitarP.setObjectName("btnQuitarP")
         self.lblTotalP = QtWidgets.QLabel(parent=self.pagePedido)
-        self.lblTotalP.setGeometry(QtCore.QRect(590, 380, 161, 20))
+        self.lblTotalP.setGeometry(QtCore.QRect(580, 400, 161, 20))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.lblTotalP.setFont(font)
         self.lblTotalP.setObjectName("lblTotalP")
         self.txtTotalP = QtWidgets.QLineEdit(parent=self.pagePedido)
-        self.txtTotalP.setGeometry(QtCore.QRect(590, 420, 141, 20))
+        self.txtTotalP.setGeometry(QtCore.QRect(580, 440, 141, 20))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.txtTotalP.setFont(font)
@@ -1961,6 +1960,48 @@ class Ui_MainWindow(object):
 "")
         self.txtTotalP.setReadOnly(True)
         self.txtTotalP.setObjectName("txtTotalP")
+        self.rbMesa1 = QtWidgets.QRadioButton(parent=self.pagePedido)
+        self.rbMesa1.setGeometry(QtCore.QRect(160, 50, 82, 17))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.rbMesa1.setFont(font)
+        self.rbMesa1.setObjectName("rbMesa1")
+        self.rbMesa2 = QtWidgets.QRadioButton(parent=self.pagePedido)
+        self.rbMesa2.setGeometry(QtCore.QRect(160, 80, 82, 17))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.rbMesa2.setFont(font)
+        self.rbMesa2.setObjectName("rbMesa2")
+        self.rbMesa3 = QtWidgets.QRadioButton(parent=self.pagePedido)
+        self.rbMesa3.setGeometry(QtCore.QRect(260, 50, 82, 17))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.rbMesa3.setFont(font)
+        self.rbMesa3.setObjectName("rbMesa3")
+        self.rbMesa4 = QtWidgets.QRadioButton(parent=self.pagePedido)
+        self.rbMesa4.setGeometry(QtCore.QRect(260, 80, 82, 17))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.rbMesa4.setFont(font)
+        self.rbMesa4.setObjectName("rbMesa4")
+        self.rbMesa5 = QtWidgets.QRadioButton(parent=self.pagePedido)
+        self.rbMesa5.setGeometry(QtCore.QRect(360, 50, 82, 17))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.rbMesa5.setFont(font)
+        self.rbMesa5.setObjectName("rbMesa5")
+        self.rbMesa6 = QtWidgets.QRadioButton(parent=self.pagePedido)
+        self.rbMesa6.setGeometry(QtCore.QRect(360, 80, 82, 17))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.rbMesa6.setFont(font)
+        self.rbMesa6.setObjectName("rbMesa6")
+        self.rbLlevar = QtWidgets.QRadioButton(parent=self.pagePedido)
+        self.rbLlevar.setGeometry(QtCore.QRect(470, 50, 82, 17))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.rbLlevar.setFont(font)
+        self.rbLlevar.setObjectName("rbLlevar")
         self.StackedWidget.addWidget(self.pagePedido)
         self.pageReportes = QtWidgets.QWidget()
         self.pageReportes.setObjectName("pageReportes")
@@ -2127,13 +2168,15 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.StackedWidget.setCurrentIndex(1)
+        self.StackedWidget.setCurrentIndex(4)
         self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.btnCerrarsesion.setText(_translate("MainWindow", "Cerrar Sesión"))
+        self.label.setText(_translate("MainWindow", "Menú"))
         self.btnInicio.setText(_translate("MainWindow", "Inicio"))
         self.btnUsuario.setText(_translate("MainWindow", "Usuario"))
         self.btnEmpleados.setText(_translate("MainWindow", "Empleados"))
@@ -2142,8 +2185,6 @@ class Ui_MainWindow(object):
         self.btnInsumos.setText(_translate("MainWindow", "Insumos"))
         self.btnPedidos.setText(_translate("MainWindow", "Pedidos"))
         self.btnReportes.setText(_translate("MainWindow", "Reportes"))
-        self.btnCerrarsesion.setText(_translate("MainWindow", "Cerrar Sesión"))
-        self.label.setText(_translate("MainWindow", "Menú"))
         self.label_3.setText(_translate("MainWindow", "¡Bienvenido al Sistema de Gestión, SUMAQ ÑAN!"))
         self.label_2.setText(_translate("MainWindow", "Ventas del día"))
         self.lblVentasInicio.setText(_translate("MainWindow", "S/. 1,250.00"))
@@ -2192,16 +2233,14 @@ class Ui_MainWindow(object):
         self.lblEstadoU.setText(_translate("MainWindow", "Estado:"))
         self.lblNombreU.setText(_translate("MainWindow", "Nombres - Apellidos:"))
         item = self.tableUsuario.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "ID_USUARIO"))
-        item = self.tableUsuario.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "DNI"))
-        item = self.tableUsuario.horizontalHeaderItem(2)
+        item = self.tableUsuario.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "Usuario"))
-        item = self.tableUsuario.horizontalHeaderItem(3)
+        item = self.tableUsuario.horizontalHeaderItem(2)
         item.setText(_translate("MainWindow", "Contraseña"))
-        item = self.tableUsuario.horizontalHeaderItem(4)
+        item = self.tableUsuario.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Cargo"))
-        item = self.tableUsuario.horizontalHeaderItem(5)
+        item = self.tableUsuario.horizontalHeaderItem(4)
         item.setText(_translate("MainWindow", "Estado"))
         self.lblEmpleados.setText(_translate("MainWindow", "Gestión de Empleados"))
         self.lblDniEmp.setText(_translate("MainWindow", "DNI:"))
@@ -2316,6 +2355,13 @@ class Ui_MainWindow(object):
         self.btnImprimirP.setText(_translate("MainWindow", "Imprimir ticket"))
         self.btnQuitarP.setText(_translate("MainWindow", "Quitar producto"))
         self.lblTotalP.setText(_translate("MainWindow", "TOTAL A PAGAR S/."))
+        self.rbMesa1.setText(_translate("MainWindow", "Mesa 1"))
+        self.rbMesa2.setText(_translate("MainWindow", "Mesa 2"))
+        self.rbMesa3.setText(_translate("MainWindow", "Mesa 3"))
+        self.rbMesa4.setText(_translate("MainWindow", "Mesa 4"))
+        self.rbMesa5.setText(_translate("MainWindow", "Mesa 5"))
+        self.rbMesa6.setText(_translate("MainWindow", "Mesa 6"))
+        self.rbLlevar.setText(_translate("MainWindow", "Llevar"))
         self.lblReportes.setText(_translate("MainWindow", "Reportes Ventas e Historial"))
         self.lblFechaInicioR.setText(_translate("MainWindow", "Fecha Inicio:"))
         self.lblFechaFinR.setText(_translate("MainWindow", "Fecha Fin:"))

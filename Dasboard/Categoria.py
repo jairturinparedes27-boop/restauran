@@ -2,7 +2,7 @@ from PyQt6 import QtWidgets
 from ui_Categoria import Ui_MainWindow
 from database import GestorBaseDatos
 
-class VentanaCategorias(QtWidgets.QMainWindow):  # 👈 Hereda de QWidget para solucionar el error de setCentralWidget
+class VentanaCategorias(QtWidgets.QMainWindow):  # QMainWindow porque ui_Categoria usa setCentralWidget
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()

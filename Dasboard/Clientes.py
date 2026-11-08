@@ -5,10 +5,7 @@ class GestionClientes:
     def __init__(self, ui_dashboard):
         self.ui = ui_dashboard
         self.db = GestorBaseDatos()
-        
-        # Asegurar que la tabla de clientes exista en la base de datos
-        self.crear_tabla_clientes_si_no_existe()
-        
+
         # Detectar el nombre de la tabla (por si en tu UI se llama 'tableClientes' o 'clientes')
         self.tabla = getattr(self.ui, "tableClientes", getattr(self.ui, "clientes", None))
         
@@ -29,24 +26,6 @@ class GestionClientes:
             
         # Carga inicial
         self.cargar_clientes()
-
-    def crear_tabla_clientes_si_no_existe(self):
-        """Crea la tabla clientes en SQLite si aún no está creada"""
-        try:
-            with self.db.conectar() as conexion:
-                cursor = conexion.cursor()
-                cursor.execute("""
-                    CREATE TABLE IF NOT EXISTS clientes (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        documento TEXT UNIQUE,
-                        nombre TEXT,
-                        telefono TEXT,
-                        direccion TEXT
-                    )
-                """)
-                conexion.commit()
-        except Exception as e:
-            print(f"Error al crear tabla clientes: {e}")
 
     def cargar_clientes(self):
         """Carga todos los clientes en la tabla de la interfaz"""
@@ -81,13 +60,11 @@ class GestionClientes:
             print(f"Error al cargar clientes: {e}")
 
     def guardar_cliente(self):
-        """Registra un nuevo cliente con depuración de errores"""
+        """Registra un nuevo cliente"""
         documento = self.ui.txtDocumentoCli.text().strip() if hasattr(self.ui, "txtDocumentoCli") else ""
         nombre = self.ui.txtNombreCli.text().strip() if hasattr(self.ui, "txtNombreCli") else ""
-        telefono = self.ui.txtRelefonoCli.text().strip() if hasattr(self.ui, "txtRelefonoCli") else ""
+        telefono = self.ui.txtTelefonoCli.text().strip() if hasattr(self.ui, "txtTelefonoCli") else ""
         direccion = self.ui.txtDireccionCli.text().strip() if hasattr(self.ui, "txtDireccionCli") else ""
-
-        print(f"👉 [DEBUG CLIENTE] Intentando guardar -> Doc: {documento} | Nombre: {nombre}")
 
         if not documento or not nombre:
             QtWidgets.QMessageBox.warning(self.ui.centralwidget, "Campos incompletos", "El número de Documento y el Nombre/Razón Social son obligatorios.")
@@ -102,12 +79,10 @@ class GestionClientes:
                 """, (documento, nombre, telefono, direccion))
                 conexion.commit()
 
-            print("✅ [DEBUG CLIENTE] ¡Guardado exitosamente en la BD!")
             QtWidgets.QMessageBox.information(self.ui.centralwidget, "Éxito", "Cliente registrado correctamente.")
             self.cargar_clientes()
             self.limpiar_campos_cliente()
         except Exception as e:
-            print(f"❌ [ERROR AL GUARDAR CLIENTE]: {e}")
             QtWidgets.QMessageBox.critical(self.ui.centralwidget, "Error", f"No se pudo registrar: {e}")
 
     def seleccionar_cliente(self, row, column):
@@ -123,8 +98,8 @@ class GestionClientes:
                 self.ui.txtDocumentoCli.setText(item_doc.text())
             if hasattr(self.ui, "txtNombreCli"):
                 self.ui.txtNombreCli.setText(self.tabla.item(row, 1).text())
-            if hasattr(self.ui, "txtRelefonoCli"):
-                self.ui.txtRelefonoCli.setText(self.tabla.item(row, 2).text())
+            if hasattr(self.ui, "txtTelefonoCli"):
+                self.ui.txtTelefonoCli.setText(self.tabla.item(row, 2).text())
             if hasattr(self.ui, "txtDireccionCli"):
                 self.ui.txtDireccionCli.setText(self.tabla.item(row, 3).text())
             
@@ -140,7 +115,7 @@ class GestionClientes:
         db_id = self.tabla.property("id_seleccionado")
         documento = self.ui.txtDocumentoCli.text().strip() if hasattr(self.ui, "txtDocumentoCli") else ""
         nombre = self.ui.txtNombreCli.text().strip() if hasattr(self.ui, "txtNombreCli") else ""
-        telefono = self.ui.txtRelefonoCli.text().strip() if hasattr(self.ui, "txtRelefonoCli") else ""
+        telefono = self.ui.txtTelefonoCli.text().strip() if hasattr(self.ui, "txtTelefonoCli") else ""
         direccion = self.ui.txtDireccionCli.text().strip() if hasattr(self.ui, "txtDireccionCli") else ""
 
         if not db_id or not documento or not nombre:
@@ -195,6 +170,6 @@ class GestionClientes:
         """Limpia las cajas de texto y quita la selección"""
         if hasattr(self.ui, "txtDocumentoCli"): self.ui.txtDocumentoCli.clear()
         if hasattr(self.ui, "txtNombreCli"): self.ui.txtNombreCli.clear()
-        if hasattr(self.ui, "txtRelefonoCli"): self.ui.txtRelefonoCli.clear()
+        if hasattr(self.ui, "txtTelefonoCli"): self.ui.txtTelefonoCli.clear()
         if hasattr(self.ui, "txtDireccionCli"): self.ui.txtDireccionCli.clear()
         if self.tabla: self.tabla.setProperty("id_seleccionado", None)

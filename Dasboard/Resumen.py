@@ -8,9 +8,7 @@ class GestionResumen:
         self.ui = ui_dashboard
         self.db = GestorBaseDatos()
         self.mesa_actual = ""
-        
-        self.crear_tabla_detalle_si_no_existe()
-        
+
         self.tabla = getattr(self.ui, "tablePedidos", None)
         if self.tabla:
             self.tabla.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
@@ -33,26 +31,6 @@ class GestionResumen:
             self.ui.btnCobrar.clicked.connect(self.abrir_ventana_cobro)
             
         self.configurar_buscador()
-
-    def crear_tabla_detalle_si_no_existe(self):
-        try:
-            with self.db.conectar() as conexion:
-                cursor = conexion.cursor()
-                cursor.execute("""
-                    CREATE TABLE IF NOT EXISTS detalle_pedidos (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        mesa TEXT NOT NULL,
-                        codigo TEXT NOT NULL,
-                        producto TEXT NOT NULL,
-                        cantidad INTEGER NOT NULL,
-                        precio_unitario REAL NOT NULL,
-                        subtotal REAL NOT NULL,
-                        estado TEXT DEFAULT 'PENDIENTE'
-                    )
-                """)
-                conexion.commit()
-        except Exception as e:
-            print(f"Error al crear tabla detalle_pedidos: {e}")
 
     def configurar_buscador(self):
         try:
@@ -178,7 +156,11 @@ class GestionResumen:
         try:
             cantidad = int(cantidad_str) if cantidad_str else 1
         except ValueError:
-            cantidad = 1
+            cantidad = 0
+
+        if cantidad <= 0:
+            QtWidgets.QMessageBox.warning(self.ui.centralwidget, "Cantidad inválida", "La cantidad debe ser un número entero mayor que 0.")
+            return
 
         try:
             with self.db.conectar() as conexion:

@@ -175,11 +175,19 @@ class GestionEmpleados:
             QtWidgets.QMessageBox.warning(self.ui.centralwidget, "Campos vacíos", "DNI, Nombres y Apellidos son obligatorios.")
             return
 
+        if cargo == "Seleccionar cargo...":
+            QtWidgets.QMessageBox.warning(self.ui.centralwidget, "Cargo inválido", "Por favor selecciona un cargo válido.")
+            return
+
+        if estado == "Seleccionar estado...":
+            QtWidgets.QMessageBox.warning(self.ui.centralwidget, "Estado inválido", "Por favor selecciona si sigue trabajando (Activo/Inactivo).")
+            return
+
         try:
             with self.db.conectar() as conexion:
                 cursor = conexion.cursor()
                 cursor.execute("""
-                    UPDATE empleados 
+                    UPDATE empleados
                     SET dni = ?, nombres = ?, apellidos = ?, telefono = ?, cargo = ?, fecha = ?, estado = ?
                     WHERE id = ?
                 """, (dni, nombres, apellidos, telefono, cargo, fecha, estado, db_id))

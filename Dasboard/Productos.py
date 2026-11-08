@@ -1,3 +1,4 @@
+import math
 from PyQt6 import QtWidgets
 from database import GestorBaseDatos
 
@@ -137,6 +138,32 @@ class GestionProductos:
         except Exception as e:
             print(f"Error al cargar productos: {e}")
 
+    def leer_valores_numericos(self):
+        """Lee precios y stock del formulario (acepta coma o punto decimal).
+        Devuelve (precio_compra, precio_venta, stock), o None tras avisar si algún valor es inválido."""
+        def numero(campo, tipo):
+            try:
+                valor = tipo(campo.text().strip().replace(",", "."))
+            except ValueError:
+                return None
+            return valor if math.isfinite(valor) else None
+
+        precio_compra = numero(self.ui.txtPrecioCompraPRO, float)
+        precio_venta = numero(self.ui.txtPrecioVentaPRO, float)
+        stock = numero(self.ui.txtStockPRO, int)
+
+        if precio_compra is None or precio_compra < 0:
+            error = "El precio de compra debe ser un número mayor o igual a 0 (ej. 12.50 o 12,50)."
+        elif precio_venta is None or precio_venta <= 0:
+            error = "El precio de venta debe ser un número mayor que 0 (ej. 18.00 o 18,00)."
+        elif stock is None or stock < 0:
+            error = "El stock debe ser un número entero mayor o igual a 0."
+        else:
+            return precio_compra, precio_venta, stock
+
+        QtWidgets.QMessageBox.warning(self.ui.centralwidget, "Valor inválido", error)
+        return None
+
     def guardar_producto(self):
         """Registra un nuevo producto vinculándolo con el ID de la categoría seleccionada"""
         codigo = self.ui.txtCodigoPRO.text().strip() if hasattr(self.ui, "txtCodigoPRO") else ""
@@ -145,16 +172,14 @@ class GestionProductos:
         cmb = getattr(self.ui, "cmbCategoriaPRO", None)
         id_categoria = cmb.currentData() if cmb else None
         
-        try:
-            precio_compra = float(self.ui.txtPrecioCompraPRO.text().strip()) if hasattr(self.ui, "txtPrecioCompraPRO") else 0.0
-            precio_venta = float(self.ui.txtPrecioVentaPRO.text().strip()) if hasattr(self.ui, "txtPrecioVentaPRO") else 0.0
-            stock = int(self.ui.txtStockPRO.text().strip()) if hasattr(self.ui, "txtStockPRO") else 0
-        except ValueError:
-            precio_compra, precio_venta, stock = 0.0, 0.0, 0
-
-        if not codigo or not nombre or not id_categoria or precio_venta <= 0:
-            QtWidgets.QMessageBox.warning(self.ui.centralwidget, "Aviso", "Complete los campos obligatorios, seleccione una categoría y un precio de venta válido.")
+        if not codigo or not nombre or not id_categoria:
+            QtWidgets.QMessageBox.warning(self.ui.centralwidget, "Aviso", "Complete el código y el nombre, y seleccione una categoría.")
             return
+
+        valores = self.leer_valores_numericos()
+        if valores is None:
+            return
+        precio_compra, precio_venta, stock = valores
 
         try:
             with self.db.conectar() as conexion:
@@ -219,16 +244,14 @@ class GestionProductos:
         cmb = getattr(self.ui, "cmbCategoriaPRO", None)
         id_categoria = cmb.currentData() if cmb else None
         
-        try:
-            precio_compra = float(self.ui.txtPrecioCompraPRO.text().strip()) if hasattr(self.ui, "txtPrecioCompraPRO") else 0.0
-            precio_venta = float(self.ui.txtPrecioVentaPRO.text().strip()) if hasattr(self.ui, "txtPrecioVentaPRO") else 0.0
-            stock = int(self.ui.txtStockPRO.text().strip()) if hasattr(self.ui, "txtStockPRO") else 0
-        except ValueError:
-            precio_compra, precio_venta, stock = 0.0, 0.0, 0
-
         if not db_id or not codigo or not nombre or not id_categoria:
             QtWidgets.QMessageBox.warning(self.ui.centralwidget, "Aviso", "Seleccione un producto y verifique los campos.")
             return
+
+        valores = self.leer_valores_numericos()
+        if valores is None:
+            return
+        precio_compra, precio_venta, stock = valores
 
         try:
             with self.db.conectar() as conexion:

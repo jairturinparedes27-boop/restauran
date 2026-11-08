@@ -43,7 +43,7 @@ class GestionPedidos:
             with self.db.conectar() as conexion:
                 cursor = conexion.cursor()
                 
-                # 💡 Sumamos los subtotales de todos los productos de la mesa sin filtrar por estado
+                # Sumamos los subtotales de todos los productos de la mesa sin filtrar por estado
                 cursor.execute("""
                     SELECT SUM(subtotal) 
                     FROM detalle_pedidos 

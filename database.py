@@ -1,20 +1,70 @@
+import hashlib
+import hmac
+import os
+import secrets
 import sqlite3
+from contextlib import contextmanager
+
+# Roles que pueden iniciar sesión. Cualquier otro cargo (p. ej. "Personal de limpieza") no tiene acceso.
+ROLES_CON_ACCESO = ("Administrador", "Cajero", "Mozo")
+
+_ALGORITMO = "pbkdf2_sha256"
+_ITERACIONES = 200_000
+
+
+def hashear_contrasena(contrasena):
+    """Devuelve 'pbkdf2_sha256$iteraciones$sal$hash' para guardar en la BD."""
+    sal = secrets.token_hex(16)
+    digest = hashlib.pbkdf2_hmac("sha256", contrasena.encode("utf-8"), bytes.fromhex(sal), _ITERACIONES)
+    return f"{_ALGORITMO}${_ITERACIONES}${sal}${digest.hex()}"
+
+
+def verificar_contrasena(contrasena, guardada):
+    try:
+        algoritmo, iteraciones, sal, esperado = (guardada or "").split("$")
+        if algoritmo != _ALGORITMO:
+            return False
+        digest = hashlib.pbkdf2_hmac("sha256", contrasena.encode("utf-8"), bytes.fromhex(sal), int(iteraciones))
+    except ValueError:
+        return False
+    return hmac.compare_digest(digest.hex(), esperado)
+
+
+def es_hash(valor):
+    return (valor or "").startswith(_ALGORITMO + "$")
+
 
 class GestorBaseDatos:
+    # Rutas de BD ya preparadas en este proceso: las tablas y los datos iniciales
+    # se revisan una sola vez, aunque cada módulo cree su propio GestorBaseDatos.
+    _inicializadas = set()
+
     def __init__(self, nombre_db="restaurante.db"):
         self.nombre_db = nombre_db
+        clave = os.path.abspath(nombre_db)
+        if clave in GestorBaseDatos._inicializadas:
+            return
         self.crear_tablas()
         self.insertar_datos_iniciales()
-        self.insertar_clientes_iniciales()  
+        self.insertar_clientes_iniciales()
         self.insertar_categorias_iniciales()
         self.insertar_carta_inicial()
         self.insertar_empleados_iniciales()
+        self.migrar_contrasenas()
+        GestorBaseDatos._inicializadas.add(clave)
 
+    @contextmanager
     def conectar(self):
+        """Uso: `with self.db.conectar() as conexion:`. Hace commit si todo sale bien,
+        rollback si hay un error, y siempre cierra la conexión (sqlite3 por sí solo no la cierra)."""
         conexion = sqlite3.connect(self.nombre_db)
-        # 💡 Vital: Habilita el soporte de claves foráneas en SQLite
-        conexion.execute("PRAGMA foreign_keys = ON;")
-        return conexion
+        try:
+            # Vital: habilita el soporte de claves foráneas en SQLite
+            conexion.execute("PRAGMA foreign_keys = ON;")
+            with conexion:
+                yield conexion
+        finally:
+            conexion.close()
 
     def crear_tablas(self):
         with self.conectar() as conexion:
@@ -65,7 +115,7 @@ class GestorBaseDatos:
                 )
             """)
 
-            # 5. Tabla Pedidos / Ventas
+            # 5. Tabla Pedidos: mesas abiertas (la venta cobrada queda en 'ventas')
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS pedidos (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -76,7 +126,21 @@ class GestorBaseDatos:
                 )
             """)
 
-            # 6. Tabla Empleados
+            # 6. Detalle de los pedidos abiertos de cada mesa
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS detalle_pedidos (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    mesa TEXT NOT NULL,
+                    codigo TEXT NOT NULL,
+                    producto TEXT NOT NULL,
+                    cantidad INTEGER NOT NULL,
+                    precio_unitario REAL NOT NULL,
+                    subtotal REAL NOT NULL,
+                    estado TEXT DEFAULT 'PENDIENTE'
+                )
+            """)
+
+            # 7. Tabla Empleados
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS empleados (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -90,7 +154,7 @@ class GestorBaseDatos:
                 )
             """)
 
-            # 7. Tabla Clientes
+            # 8. Tabla Clientes
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS clientes (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -101,36 +165,55 @@ class GestorBaseDatos:
                 )
             """)
 
+            # 9. Ventas cobradas (historial para reportes) y su detalle
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS ventas (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    fecha TEXT NOT NULL,
+                    mesa TEXT NOT NULL,
+                    tipo_comprobante TEXT NOT NULL,
+                    serie TEXT NOT NULL,
+                    numero INTEGER NOT NULL,
+                    cliente_documento TEXT,
+                    cliente_nombre TEXT,
+                    metodo_pago TEXT NOT NULL,
+                    total REAL NOT NULL,
+                    monto_recibido REAL NOT NULL,
+                    vuelto REAL NOT NULL,
+                    UNIQUE (serie, numero)
+                )
+            """)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS detalle_ventas (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    id_venta INTEGER NOT NULL,
+                    codigo TEXT,
+                    producto TEXT NOT NULL,
+                    cantidad INTEGER NOT NULL,
+                    precio_unitario REAL NOT NULL,
+                    subtotal REAL NOT NULL,
+                    FOREIGN KEY (id_venta) REFERENCES ventas(id) ON DELETE CASCADE
+                )
+            """)
+
             conexion.commit()
 
-    def obtener_estado_mesa(self, mesa):
-        """Calcula el total real sumando el detalle de los productos pendientes de la mesa"""
+    def tabla_vacia(self, cursor, tabla):
+        """Los datos de ejemplo solo se cargan en una BD nueva, para que lo que el
+        usuario borre o renombre no vuelva a aparecer al reiniciar la app."""
+        cursor.execute(f"SELECT COUNT(*) FROM {tabla}")
+        return cursor.fetchone()[0] == 0
+
+    def migrar_contrasenas(self):
+        """Convierte a hash las contraseñas guardadas en texto plano por versiones anteriores."""
         with self.conectar() as conexion:
             cursor = conexion.cursor()
-            
-            cursor.execute("""
-                SELECT SUM(subtotal) 
-                FROM detalle_pedidos 
-                WHERE mesa = ? AND estado = 'PENDIENTE'
-            """, (mesa,))
-            resultado = cursor.fetchone()
-            
-            total = float(resultado[0]) if resultado and resultado[0] is not None else 0.0
-            
-            if total > 0:
-                return "OCUPADA", total
-                
-            cursor.execute("""
-                SELECT estado 
-                FROM pedidos 
-                WHERE mesa = ? AND estado != 'PAGADO'
-            """, (mesa,))
-            res_pedido = cursor.fetchone()
-            
-            if res_pedido:
-                return "OCUPADA", 0.0
-                
-            return "LIBRE", 0.0
+            cursor.execute("SELECT id, contrasena FROM usuarios")
+            for id_usuario, contrasena in cursor.fetchall():
+                if not es_hash(contrasena):
+                    cursor.execute("UPDATE usuarios SET contrasena = ? WHERE id = ?",
+                                   (hashear_contrasena(contrasena or ""), id_usuario))
+            conexion.commit()
 
     def insertar_datos_iniciales(self):
         usuarios = [
@@ -147,13 +230,15 @@ class GestorBaseDatos:
 
         with self.conectar() as conexion:
             cursor = conexion.cursor()
+            if not self.tabla_vacia(cursor, "usuarios"):
+                return
 
-            for usuario in usuarios:
+            for dni, usuario, contrasena, rol, estado in usuarios:
                 cursor.execute("""
                     INSERT OR IGNORE INTO usuarios
                     (dni, usuario, contrasena, rol, estado)
                     VALUES (?, ?, ?, ?, ?)
-                """, usuario)
+                """, (dni, usuario, hashear_contrasena(contrasena), rol, estado))
 
             conexion.commit()
 
@@ -189,6 +274,8 @@ class GestorBaseDatos:
 
         with self.conectar() as conexion:
             cursor = conexion.cursor()
+            if not self.tabla_vacia(cursor, "clientes"):
+                return
             for doc, nombre, telf, dir_cli in clientes_data:
                 cursor.execute("""
                     INSERT OR IGNORE INTO clientes (documento, nombre, telefono, direccion)
@@ -209,6 +296,8 @@ class GestorBaseDatos:
 
         with self.conectar() as conexion:
             cursor = conexion.cursor()
+            if not self.tabla_vacia(cursor, "categorias"):
+                return
             for categoria in categorias:
                 cursor.execute("""
                     INSERT OR IGNORE INTO categorias (nombre_categoria)
@@ -239,10 +328,12 @@ class GestorBaseDatos:
 
         with self.conectar() as conexion:
             cursor = conexion.cursor()
+            if not self.tabla_vacia(cursor, "productos"):
+                return
             for codigo, categoria, nombre, compra, venta, stock in productos:
                 cursor.execute("SELECT id FROM categorias WHERE nombre_categoria = ?", (categoria,))
                 resultado = cursor.fetchone()
-                
+
                 if resultado:
                     id_categoria = resultado[0]
                     cursor.execute("""
@@ -264,6 +355,8 @@ class GestorBaseDatos:
 
         with self.conectar() as conexion:
             cursor = conexion.cursor()
+            if not self.tabla_vacia(cursor, "empleados"):
+                return
 
             for empleado in empleados_data:
                 cursor.execute("""

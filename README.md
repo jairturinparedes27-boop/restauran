@@ -1,1 +1,42 @@
-# restauran
+# Sumaq Ñan — sistema de restaurante
+
+Aplicación de escritorio en Python + PyQt6 con base de datos SQLite: login por roles, mantenimiento de usuarios, empleados, clientes y productos, toma de pedidos por mesa y cobro con boleta o factura en PDF.
+
+## Instalación
+
+```
+pip install -r requirements.txt
+```
+
+En Anaconda usa `pip install "PyQt6==6.6.1" "PyQt6-Qt6==6.6.1"`: las versiones más nuevas no cargan porque Anaconda trae una versión antigua de las bibliotecas de Visual C++.
+
+## Ejecutar
+
+```
+python main.py
+```
+
+La primera vez se crea `restaurante.db` con datos de ejemplo. Usuarios iniciales: `admin`, `cajero` y `mozo`, todos con contraseña `1234`. **Cámbialas** desde el módulo Usuarios.
+
+## Desarrollo
+
+```
+python dev.py                     # reinicia la app cada vez que guardas un .py o .ui
+python dev.py --rol Administrador # entra directo al panel (también Cajero o Mozo)
+```
+
+Al guardar un `.ui` en Qt Designer, `dev.py` regenera su `ui_*.py`, salvo que desaparezca algún widget que el código pueda estar usando.
+
+## Roles
+
+| Rol | Módulos |
+|---|---|
+| Administrador | Todos |
+| Cajero | Clientes, Productos, Pedidos |
+| Mozo | Clientes, Pedidos |
+
+Solo estos tres cargos pueden tener usuario. El rol de un usuario es el cargo de su empleado.
+
+## Ventas
+
+Cada cobro se guarda en las tablas `ventas` y `detalle_ventas` con fecha, método de pago, cliente y número correlativo (`B001-00000001` para boletas, `F001-00000001` para facturas). Los PDF se guardan en `boletas/` y `facturas/`.

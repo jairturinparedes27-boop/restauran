@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Base de datos local: cada equipo genera la suya al ejecutar la app
+restaurante.db
+
+# Comprobantes generados por la caja
+boletas/
+facturas/

@@ -41,9 +41,43 @@ def test_reporte_de_un_rango_de_fechas(con_ventas):
 
 def test_fecha_inicio_posterior_a_fecha_fin(con_ventas, avisos):
     ui = con_ventas.ui
+    avisos_antes = len(avisos)
     ui.dtInicioR.setDate(QDate.currentDate().addDays(1))
+    # Mientras se eligen fechas no salen ventanas; el mensaje queda en la tabla
+    assert len(avisos) == avisos_antes
+    assert "posterior" in ui.tableReporte.item(0, 0).text()
     ui.btnFiltrarR.click()
     assert avisos[-1][1] == "Fechas inválidas"
+
+
+def test_sin_ventas_la_tabla_lo_explica(panel):
+    ui = panel.ui
+    panel.gestion_reportes.filtrar()
+    assert ui.tableReporte.rowCount() == 1
+    assert ui.tableReporte.item(0, 0).text().startswith("No hay ventas registradas el ")
+    assert ui.txtTotalR.text() == "0.00"
+    assert ui.lblResumenR.text() == ""
+
+
+def test_cambiar_una_fecha_actualiza_el_reporte(con_ventas):
+    ui = con_ventas.ui
+    ui.dtInicioR.setDate(QDate(2026, 1, 1))  # sin pulsar Filtrar
+    assert ui.tableReporte.rowCount() == 2
+    assert ui.txtTotalR.text() == "31.00"
+    assert ui.lblResumenR.text() == "2 ventas · ticket promedio S/ 15.50"
+
+
+def test_doble_clic_muestra_el_detalle_de_la_venta(con_ventas):
+    ui = con_ventas.ui
+    con_ventas.gestion_reportes.filtrar()
+    ui.tableReporte.cellDoubleClicked.emit(0, 0)
+
+    dialogo = con_ventas.gestion_reportes.dialogo_detalle
+    assert dialogo.isVisible() and dialogo.windowTitle() == "Venta B001-00000001"
+    tabla = dialogo.findChild(QtWidgets.QTableWidget)
+    platos = sorted((tabla.item(r, 0).text(), tabla.item(r, 1).text()) for r in range(tabla.rowCount()))
+    assert platos == [("Choclo con Queso", "1"), ("Inca Kola", "2")]
+    dialogo.close()
 
 
 def test_exportar_excel(con_ventas, guardar_en):
@@ -86,8 +120,10 @@ def test_inicio_muestra_datos_reales(con_ventas, bd):
     assert ui.lblVentasInicio.text() == "S/. 13.00"            # solo las ventas de hoy
     assert ui.lblMesasInicio.text() == "1 pedido hoy"
     assert ui.lblPlatosInicio.text() == "16 disponibles"
-    assert ui.lblStockInicio.text() == "1 alerta"
-    assert ui.tableStockInicio.item(0, 0).text() == "P12"
+    # P12 más los 3 insumos de ejemplo que empiezan bajo su mínimo
+    assert ui.lblStockInicio.text() == "4 alertas"
+    codigos = [ui.tableStockInicio.item(r, 0).text() for r in range(ui.tableStockInicio.rowCount())]
+    assert codigos == ["P12", "I03", "I08", "I11"]
 
     estados = [ui.tablePedidosInicio.item(r, 4).text() for r in range(ui.tablePedidosInicio.rowCount())]
     assert estados == ["En curso", "Pagado", "Pagado"]

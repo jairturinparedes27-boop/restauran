@@ -5,6 +5,7 @@ from PyQt6 import QtWidgets, QtGui, QtCore
 from PyQt6.QtCore import QDate
 from PyQt6.QtPrintSupport import QPrinter
 from database import GestorBaseDatos
+from Dasboard.estilo import ESTILO_TABLA, ajustar_tabla
 
 COLUMNAS_VENTAS = ["Comprobante", "Fecha / Hora", "Tipo", "Documento", "Cliente", "Mesa",
                    "Método de pago", "Usuario", "Total"]
@@ -25,7 +26,9 @@ class GestionReportes:
         self.ui = ui_dashboard
         self.db = GestorBaseDatos()
         self.ventas = []          # filas del último filtro
+        self.ids = []             # id de cada venta de self.ventas (para ver su detalle)
         self.rango = None         # (inicio, fin) del último filtro, en formato AAAA-MM-DD
+        self.dialogo_detalle = None
 
         self.ui.tableReporte.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
         self.ui.tableReporte.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
@@ -37,16 +40,21 @@ class GestionReportes:
             campo.setCalendarPopup(True)
             campo.setDate(QDate.currentDate())
 
-        self.ui.btnFiltrarR.clicked.connect(self.filtrar)
+        self.ui.btnFiltrarR.clicked.connect(lambda: self.filtrar())
         self.ui.btnExcelR.clicked.connect(self.exportar_excel)
         self.ui.btnPdfR.clicked.connect(self.exportar_pdf)
         self.ui.StackedWidget.currentChanged.connect(self.al_cambiar_pagina)
+        # Al cambiar una fecha el reporte se actualiza solo (sin ventanas de aviso mientras se elige)
+        self.ui.dtInicioR.dateChanged.connect(lambda _: self.filtrar(silencioso=True))
+        self.ui.dtFinR.dateChanged.connect(lambda _: self.filtrar(silencioso=True))
+        # Doble clic en una venta: ver su detalle
+        self.ui.tableReporte.cellDoubleClicked.connect(lambda fila, _col: self.abrir_detalle(fila))
 
         self.filtrar()
 
     def al_cambiar_pagina(self, _indice):
         if self.ui.StackedWidget.currentWidget() is self.ui.pageReportes:
-            self.filtrar()
+            self.filtrar(silencioso=True)
 
     def aviso(self, titulo, mensaje):
         QtWidgets.QMessageBox.warning(self.ui.centralwidget, titulo, mensaje)
@@ -57,32 +65,121 @@ class GestionReportes:
         with self.db.conectar() as conexion:
             return conexion.execute(sql, (f"{inicio} 00:00:00", f"{fin} 23:59:59")).fetchall()
 
-    def filtrar(self):
+    def filtrar(self, silencioso=False):
         inicio = self.ui.dtInicioR.date().toString("yyyy-MM-dd")
         fin = self.ui.dtFinR.date().toString("yyyy-MM-dd")
         if inicio > fin:
-            self.aviso("Fechas inválidas", "La fecha de inicio es posterior a la fecha fin.")
+            self.ventas, self.ids, self.rango = [], [], None
+            self.mostrar_vacio("La fecha de inicio es posterior a la fecha fin.")
+            if not silencioso:
+                self.aviso("Fechas inválidas", "La fecha de inicio es posterior a la fecha fin.")
             return
 
         try:
-            self.ventas = self.consultar("""
-                SELECT serie || '-' || printf('%08d', numero), fecha, tipo_comprobante, cliente_documento,
+            filas = self.consultar("""
+                SELECT id, serie || '-' || printf('%08d', numero), fecha, tipo_comprobante, cliente_documento,
                        cliente_nombre, mesa, metodo_pago, COALESCE(usuario, ''), total
                 FROM ventas WHERE fecha BETWEEN ? AND ? ORDER BY fecha DESC, id DESC
             """, inicio, fin)
         except Exception as e:
             QtWidgets.QMessageBox.critical(self.ui.centralwidget, "Error", f"No se pudieron consultar las ventas: {e}")
             return
+        self.ids = [fila[0] for fila in filas]
+        self.ventas = [fila[1:] for fila in filas]
         self.rango = (inicio, fin)
 
+        if not self.ventas:
+            rango = dia(inicio) if inicio == fin else f"el {dia(inicio)} y el {dia(fin)}"
+            self.mostrar_vacio(f"No hay ventas registradas {'el ' if inicio == fin else 'entre '}{rango}.")
+            return
+
         tabla = self.ui.tableReporte
+        tabla.clearSpans()
         tabla.setRowCount(0)
         for i, (comprobante, fecha, _tipo, documento, _cliente, mesa, _metodo, usuario, total) in enumerate(self.ventas):
             tabla.insertRow(i)
             for j, valor in enumerate([comprobante, fecha_corta(fecha), documento, mesa, usuario, f"S/. {total:.2f}"]):
-                tabla.setItem(i, j, QtWidgets.QTableWidgetItem(str(valor)))
+                item = QtWidgets.QTableWidgetItem(str(valor))
+                item.setToolTip("Doble clic para ver el detalle de la venta")
+                if j == 5:
+                    item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignRight | QtCore.Qt.AlignmentFlag.AlignVCenter)
+                tabla.setItem(i, j, item)
 
-        self.ui.txtTotalR.setText(f"{self.total():,.2f}")
+        total = self.total()
+        self.ui.txtTotalR.setText(f"{total:,.2f}")
+        cantidad = len(self.ventas)
+        self.ui.lblResumenR.setText(f"{cantidad} {'venta' if cantidad == 1 else 'ventas'} · "
+                                    f"ticket promedio S/ {total / cantidad:,.2f}")
+
+    def mostrar_vacio(self, mensaje):
+        """Una sola fila con el mensaje, ocupando todo el ancho de la tabla."""
+        tabla = self.ui.tableReporte
+        tabla.clearSpans()
+        tabla.setRowCount(1)
+        tabla.setSpan(0, 0, 1, tabla.columnCount())
+        item = QtWidgets.QTableWidgetItem(mensaje)
+        item.setFlags(QtCore.Qt.ItemFlag.NoItemFlags)
+        item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        item.setForeground(QtGui.QColor("#7f8c8d"))
+        tabla.setItem(0, 0, item)
+        self.ui.txtTotalR.setText("0.00")
+        self.ui.lblResumenR.setText("")
+
+    def detalle_venta(self, id_venta):
+        """Cabecera y platos de una venta."""
+        with self.db.conectar() as conexion:
+            cabecera = conexion.execute("""
+                SELECT serie || '-' || printf('%08d', numero), fecha, tipo_comprobante, cliente_documento,
+                       cliente_nombre, mesa, metodo_pago, COALESCE(usuario, ''), total, monto_recibido, vuelto
+                FROM ventas WHERE id = ?
+            """, (id_venta,)).fetchone()
+            platos = conexion.execute("""
+                SELECT producto, cantidad, precio_unitario, subtotal FROM detalle_ventas
+                WHERE id_venta = ? ORDER BY id
+            """, (id_venta,)).fetchall()
+        return cabecera, platos
+
+    def abrir_detalle(self, fila):
+        if fila >= len(self.ids):
+            return  # fila de "no hay ventas"
+        try:
+            cabecera, platos = self.detalle_venta(self.ids[fila])
+        except Exception as e:
+            QtWidgets.QMessageBox.critical(self.ui.centralwidget, "Error", f"No se pudo leer la venta: {e}")
+            return
+        comprobante, fecha, tipo, documento, cliente, mesa, metodo, usuario, total, recibido, vuelto = cabecera
+
+        dialogo = QtWidgets.QDialog(self.ui.centralwidget.window())
+        dialogo.setWindowTitle(f"Venta {comprobante}")
+        dialogo.resize(520, 380)
+        capa = QtWidgets.QVBoxLayout(dialogo)
+
+        datos = QtWidgets.QLabel(
+            f"<b>{tipo.capitalize()} {comprobante}</b> · {fecha_corta(fecha)}<br>"
+            f"Cliente: {escape(cliente)} ({escape(documento)}) · {escape(mesa)}<br>"
+            f"Pago: {escape(metodo)} · Recibido S/ {recibido:.2f} · Vuelto S/ {vuelto:.2f}"
+            + (f"<br>Atendido por: {escape(usuario)}" if usuario else ""))
+        capa.addWidget(datos)
+
+        tabla = QtWidgets.QTableWidget(len(platos), 4)
+        tabla.setHorizontalHeaderLabels(["Producto", "Cantidad", "P. unitario", "Subtotal"])
+        tabla.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
+        tabla.setStyleSheet(ESTILO_TABLA)
+        for i, (producto, cantidad, precio, subtotal) in enumerate(platos):
+            for j, valor in enumerate([producto, cantidad, f"S/. {precio:.2f}", f"S/. {subtotal:.2f}"]):
+                tabla.setItem(i, j, QtWidgets.QTableWidgetItem(str(valor)))
+        ajustar_tabla(tabla, (0,))
+        capa.addWidget(tabla)
+
+        pie = QtWidgets.QLabel(f"<b>Total: S/ {total:,.2f}</b>")
+        pie.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight)
+        capa.addWidget(pie)
+        cerrar = QtWidgets.QPushButton("Cerrar")
+        cerrar.clicked.connect(dialogo.close)
+        capa.addWidget(cerrar, alignment=QtCore.Qt.AlignmentFlag.AlignRight)
+
+        self.dialogo_detalle = dialogo
+        dialogo.show()
 
     def total(self):
         return sum(fila[-1] for fila in self.ventas)

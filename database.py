@@ -50,6 +50,7 @@ class GestorBaseDatos:
         self.insertar_categorias_iniciales()
         self.insertar_carta_inicial()
         self.insertar_empleados_iniciales()
+        self.insertar_insumos_iniciales()
         self.migrar_contrasenas()
         GestorBaseDatos._inicializadas.add(clave)
 
@@ -104,16 +105,23 @@ class GestorBaseDatos:
                 )
             """)
 
-            # 4. Tabla Insumos
+            # 4. Tabla Insumos (materia prima: carnes, verduras, carbón...)
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS insumos (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    codigo TEXT,
                     nombre TEXT NOT NULL,
+                    categoria TEXT,
                     stock_actual REAL NOT NULL,
                     unidad_medida TEXT NOT NULL,
-                    stock_minimo REAL NOT NULL
+                    stock_minimo REAL NOT NULL DEFAULT 0,
+                    precio_unitario REAL NOT NULL DEFAULT 0
                 )
             """)
+            # Bases creadas con la primera versión de la tabla
+            self.agregar_columnas(cursor, "insumos", [("codigo", "TEXT"), ("categoria", "TEXT"),
+                                                      ("precio_unitario", "REAL NOT NULL DEFAULT 0")])
+            cursor.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_insumos_codigo ON insumos (codigo)")
 
             # 5. Tabla Pedidos: mesas abiertas (la venta cobrada queda en 'ventas')
             cursor.execute("""
@@ -185,9 +193,7 @@ class GestorBaseDatos:
                 )
             """)
             # Bases creadas antes de registrar quién cobra cada venta
-            cursor.execute("PRAGMA table_info(ventas)")
-            if "usuario" not in [columna[1] for columna in cursor.fetchall()]:
-                cursor.execute("ALTER TABLE ventas ADD COLUMN usuario TEXT")
+            self.agregar_columnas(cursor, "ventas", [("usuario", "TEXT")])
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_ventas_fecha ON ventas (fecha)")
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS detalle_ventas (
@@ -203,6 +209,15 @@ class GestorBaseDatos:
             """)
 
             conexion.commit()
+
+    @staticmethod
+    def agregar_columnas(cursor, tabla, columnas):
+        """Agrega a una tabla existente las columnas que le falten (migración de bases antiguas)."""
+        cursor.execute(f"PRAGMA table_info({tabla})")
+        existentes = {fila[1] for fila in cursor.fetchall()}
+        for nombre, definicion in columnas:
+            if nombre not in existentes:
+                cursor.execute(f"ALTER TABLE {tabla} ADD COLUMN {nombre} {definicion}")
 
     def tabla_vacia(self, cursor, tabla):
         """Los datos de ejemplo solo se cargan en una BD nueva, para que lo que el
@@ -347,6 +362,35 @@ class GestorBaseDatos:
                         (codigo, nombre, id_categoria, precio_compra, precio_venta, stock)
                         VALUES (?, ?, ?, ?, ?, ?)
                     """, (codigo, nombre, id_categoria, compra, venta, stock))
+            conexion.commit()
+
+    def insertar_insumos_iniciales(self):
+        """Materia prima de la carta. Tres insumos empiezan por debajo de su mínimo
+        para que se vean las alertas de stock."""
+        insumos = [
+            # código, nombre, categoría, stock, unidad, stock mínimo, precio unitario
+            ("I01", "Corazón de res", "Carnes", 12, "kg", 5, 18.00),
+            ("I02", "Pechuga de pollo", "Carnes", 8, "kg", 5, 14.50),
+            ("I03", "Chorizo parrillero", "Carnes", 3, "kg", 4, 22.00),
+            ("I04", "Carne de res para churrasco", "Carnes", 6, "kg", 3, 32.00),
+            ("I05", "Panceta de cerdo", "Carnes", 4, "kg", 2, 26.00),
+            ("I06", "Papa amarilla", "Verduras", 20, "kg", 10, 3.50),
+            ("I07", "Choclo", "Verduras", 30, "unidad", 15, 1.20),
+            ("I08", "Queso fresco", "Lácteos", 1.5, "kg", 2, 20.00),
+            ("I09", "Ají panca", "Condimentos", 2, "kg", 1, 16.00),
+            ("I10", "Vinagre", "Condimentos", 3, "L", 1, 4.50),
+            ("I11", "Carbón vegetal", "Otros", 10, "kg", 15, 3.00),
+            ("I12", "Palitos de anticucho", "Descartables", 500, "unidad", 200, 0.05),
+        ]
+
+        with self.conectar() as conexion:
+            cursor = conexion.cursor()
+            if not self.tabla_vacia(cursor, "insumos"):
+                return
+            cursor.executemany("""
+                INSERT INTO insumos (codigo, nombre, categoria, stock_actual, unidad_medida, stock_minimo, precio_unitario)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            """, insumos)
             conexion.commit()
 
     def insertar_empleados_iniciales(self):

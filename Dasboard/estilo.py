@@ -3,6 +3,24 @@ from PyQt6.QtCore import Qt
 
 Modo = QtWidgets.QHeaderView.ResizeMode
 
+# Mismo estilo que las tablas de Dasboard.ui, para tablas creadas desde el código
+ESTILO_TABLA = """
+QTableWidget {
+    background-color: #ffffff;
+    gridline-color: #e0e0e0;
+    selection-background-color: #34495e;
+    selection-color: #ffffff;
+    border: 1px solid #dcdcdc;
+}
+QHeaderView::section {
+    background-color: #2c3e50;
+    color: white;
+    padding: 4px;
+    border: none;
+    font-weight: bold;
+}
+"""
+
 
 def ajustar_tabla(tabla, columnas_flexibles=None):
     """Oculta los números de fila y reparte el ancho de la tabla: las columnas flexibles

@@ -12,6 +12,7 @@ from Dasboard.Clientes import GestionClientes
 from Dasboard.Productos import GestionProductos
 from Dasboard.Pedidos import GestionPedidos
 from Dasboard.Inicio import GestionInicio
+from Dasboard.insumos import GestionInsumos
 from Dasboard.Reportes import GestionReportes
 from Dasboard.estilo import ajustar_tabla
 
@@ -119,6 +120,7 @@ class VentanaDashboard(QtWidgets.QMainWindow):
         self.gestion_clientes = GestionClientes(self.ui)
         self.gestion_productos = GestionProductos(self.ui)
         self.gestor_pedidos = GestionPedidos(self.ui, usuario)
+        self.gestion_insumos = GestionInsumos(self.ui)
         self.gestion_inicio = GestionInicio(self.ui)
         self.gestion_reportes = GestionReportes(self.ui)
 
@@ -127,7 +129,7 @@ class VentanaDashboard(QtWidgets.QMainWindow):
         ajustar_tabla(self.ui.tableEmpleados, (1, 2))
         ajustar_tabla(self.ui.tableClientes, (1, 3))
         ajustar_tabla(self.ui.tableProductos, (1, 2))
-        ajustar_tabla(self.ui.tableInsumos, (1, 2))
+        ajustar_tabla(self.ui.tableInsumos, (1,))
         ajustar_tabla(self.ui.tablePedidos, (1,))
         ajustar_tabla(self.ui.tableReporte, (1, 4))
         ajustar_tabla(self.ui.tablePedidosInicio)

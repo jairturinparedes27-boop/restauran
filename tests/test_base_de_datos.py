@@ -11,6 +11,7 @@ def test_bd_nueva_se_llena_con_datos_de_ejemplo(bd):
     database.GestorBaseDatos()
     assert bd.q("SELECT COUNT(*) FROM usuarios") == [(8,)]
     assert bd.q("SELECT COUNT(*) FROM productos") == [(16,)]
+    assert bd.q("SELECT COUNT(*) FROM insumos") == [(12,)]
 
 
 def test_lo_borrado_o_renombrado_no_reaparece(bd):

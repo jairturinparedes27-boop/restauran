@@ -64,9 +64,9 @@ class GestionInicio:
                 """, (STOCK_CRITICO,))
                 criticos = cursor.fetchall()
                 cursor.execute("""
-                    SELECT id, nombre, '-', stock_actual, unidad_medida FROM insumos
-                    WHERE stock_actual <= stock_minimo
-                    ORDER BY stock_actual
+                    SELECT COALESCE(codigo, id), nombre, COALESCE(categoria, '-'), stock_actual, unidad_medida
+                    FROM insumos WHERE stock_actual <= stock_minimo
+                    ORDER BY codigo
                 """)
                 criticos += cursor.fetchall()
 

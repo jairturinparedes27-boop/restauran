@@ -51,4 +51,5 @@ Solo estos tres cargos pueden tener usuario. El rol de un usuario es el cargo de
 Cada cobro se guarda en las tablas `ventas` y `detalle_ventas` con fecha, método de pago, cliente, quién cobró y número correlativo (`B001-00000001` para boletas, `F001-00000001` para facturas). Los PDF se guardan en `boletas/` y `facturas/`.
 
 - **Inicio:** ventas y pedidos del día, platos disponibles, productos con 10 unidades o menos (e insumos bajo su mínimo), mesas abiertas y últimas ventas.
-- **Reportes:** ventas entre dos fechas con su total. Se exportan a Excel (hojas de ventas, productos vendidos y métodos de pago) o a PDF; por defecto se guardan en `reportes/`.
+- **Reportes:** ventas entre dos fechas con su total, número de ventas y ticket promedio; se actualiza al cambiar las fechas y con doble clic se ve el detalle de una venta. Se exportan a Excel (hojas de ventas, productos vendidos y métodos de pago) o a PDF; por defecto se guardan en `reportes/`.
+- **Insumos:** materia prima con código, categoría, stock actual, stock mínimo, unidad y precio. Los que están en su mínimo o por debajo se marcan en rojo y aparecen como alerta en Inicio.

@@ -3604,19 +3604,23 @@ QPushButton:pressed {
           <widget class="QLabel" name="lblAtender">
            <property name="geometry">
             <rect>
-             <x>220</x>
-             <y>30</y>
-             <width>151</width>
-             <height>16</height>
+             <x>210</x>
+             <y>20</y>
+             <width>481</width>
+             <height>31</height>
             </rect>
            </property>
            <property name="font">
             <font>
-             <pointsize>11</pointsize>
+             <pointsize>12</pointsize>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
-            <string>Atendiendo: MESA 1 </string>
+            <string>Atendiendo: MESA 01</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
            </property>
           </widget>
           <widget class="QLabel" name="lblBuscarPlato">

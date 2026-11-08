@@ -246,148 +246,109 @@ class VentanaCaja(QtWidgets.QMainWindow):
 
     def imprimir_ticket(self, numero_comprobante, fecha_hora, metodo_pago, monto_recibido, vuelto,
                         cliente_nombre, cliente_doc, productos):
-        fecha_actual = fecha_hora.strftime("%d/%m/%Y")
-        hora_actual = fecha_hora.strftime("%H:%M:%S")
-
-        subtotal = self.total_pagar / 1.18
-        igv = self.total_pagar - subtotal
-
+        """Genera el comprobante en PDF con formato de ticket de 80 mm.
+        El alto del papel se ajusta al contenido, así que siempre sale en una sola página."""
         es_factura = numero_comprobante.startswith("F")
-        nombre_carpeta = "facturas" if es_factura else "boletas"
         tipo_comprobante = "FACTURA ELECTRÓNICA" if es_factura else "BOLETA DE VENTA ELECTRÓNICA"
+        op_gravada = self.total_pagar / 1.18
+        igv = self.total_pagar - op_gravada
 
-        ruta_carpeta = os.path.join(os.getcwd(), nombre_carpeta)
+        ruta_carpeta = os.path.join(os.getcwd(), "facturas" if es_factura else "boletas")
         os.makedirs(ruta_carpeta, exist_ok=True)
+        ruta_pdf = os.path.join(ruta_carpeta, f"{numero_comprobante}_{fecha_hora.strftime('%Y%m%d_%H%M%S')}.pdf")
 
-        nombre_archivo = f"{numero_comprobante}_{fecha_hora.strftime('%Y%m%d_%H%M%S')}.pdf"
-        ruta_pdf = os.path.join(ruta_carpeta, nombre_archivo)
+        def filas(*pares, negrita=False, tamano=None):
+            """Filas de dos columnas: texto a la izquierda y monto a la derecha."""
+            estilo = "font-weight: bold;" if negrita else ""
+            estilo += f" font-size: {tamano};" if tamano else ""
+            celdas = "".join(f'<tr style="{estilo}"><td>{izquierda}</td><td align="right">{derecha}</td></tr>'
+                             for izquierda, derecha in pares)
+            return f'<table width="100%" cellspacing="0" cellpadding="1">{celdas}</table>'
 
-        filas_productos = ""
-        for prod, cant, p_unit, sub in productos:
-            filas_productos += f"""
-                <tr>
-                    <td style="text-align: center; width: 10%;">{cant}</td>
-                    <td style="text-align: left; width: 48%;">{escape(str(prod))}</td>
-                    <td style="text-align: right; width: 21%; white-space: nowrap;">S/{p_unit:.2f}</td>
-                    <td style="text-align: right; width: 21%; white-space: nowrap;">S/{sub:.2f}</td>
-                </tr>
-            """
+        def soles(monto):
+            return f"S/ {monto:,.2f}"
+
+        # Datos del cliente
+        documento = (cliente_doc or "").strip()
+        tipo_doc = "RUC" if len(documento) == 11 else "DNI" if len(documento) == 8 else "Doc."
+        if es_factura:
+            cliente = [f"<b>Razón social:</b> {escape(cliente_nombre)}", f"<b>{tipo_doc}:</b> {escape(documento)}"]
+        else:
+            cliente = [f"<b>Cliente:</b> {escape(cliente_nombre)}"]
+            if documento not in ("", "-"):
+                cliente.append(f"<b>{tipo_doc}:</b> {escape(documento)}")
+        cliente.append(f"<b>Mesa:</b> {escape(self.mesa_actual)}")
+        if self.usuario:
+            cliente.append(f"<b>Atendido por:</b> {escape(self.usuario)}")
+
+        # Detalle: el nombre del plato en su línea y debajo cantidad x precio = importe
+        detalle = ""
+        for producto, cantidad, precio, subtotal in productos:
+            detalle += f'<p style="margin: 3px 0 0 0;">{escape(str(producto))}</p>'
+            detalle += filas((f"&nbsp;&nbsp;{cantidad} x {soles(precio)}", soles(subtotal)))
+
+        pago = [("Forma de pago:", escape(metodo_pago))]
+        if metodo_pago == "Efectivo":
+            pago += [("Monto recibido:", soles(monto_recibido)), ("Vuelto:", soles(vuelto))]
 
         html_ticket = f"""
-        <html>
-        <head>
-            <style>
-                body {{
-                    font-family: 'Courier New', Courier, monospace;
-                    font-size: 10px;
-                    width: 220px;
-                    margin: 0 auto;
-                    padding: 0;
-                    color: #000;
-                }}
-                .center {{ text-align: center; }}
-                .bold {{ font-weight: bold; }}
-                table {{
-                    width: 100%;
-                    border-collapse: collapse;
-                    margin-top: 6px;
-                    margin-bottom: 6px;
-                }}
-                th {{
-                    font-size: 10px;
-                    border-bottom: 1px solid #000;
-                    padding: 3px 2px;
-                    white-space: nowrap;
-                }}
-                td {{
-                    font-size: 10px;
-                    padding: 3px 2px;
-                    vertical-align: top;
-                }}
-                .line {{
-                    border-top: 1px dashed #000;
-                    margin: 5px 0;
-                }}
-                .totales {{
-                    text-align: right;
-                    font-size: 10px;
-                    padding-right: 5px;
-                    white-space: nowrap;
-                }}
-            </style>
-        </head>
-        <body>
-            <div class="center bold" style="font-size: 12px;">SUMAQ ÑAN RESTAURANTE</div>
-            <div class="center">Sabores que nos unen</div>
-            <div class="center">RUC: 20601234567</div>
-            <div class="center">Av. Los Andes 123, Lima - Perú</div>
-            <div class="center">Teléfono: 987 654 321</div>
-
-            <div class="line"></div>
-            <div class="center bold">{tipo_comprobante}</div>
-            <div class="center">N.º {numero_comprobante}</div>
-            <div>Fecha: {fecha_actual} &nbsp; Hora: {hora_actual}</div>
-
-            <div class="line"></div>
-            <div class="bold">DATOS DEL CLIENTE</div>
-            <div>Cliente: {escape(cliente_nombre)}</div>
-            <div>Doc: {escape(cliente_doc)}</div>
-            <div>Mesa: {escape(self.mesa_actual)}</div>
-            {f'<div>Atendido por: {escape(self.usuario)}</div>' if self.usuario else ''}
-
-            <div class="line"></div>
-            <table>
-                <tr>
-                    <th style="text-align: center; width: 10%;">Cant</th>
-                    <th style="text-align: left; width: 48%;">Plato</th>
-                    <th style="text-align: right; width: 21%;">P.U.</th>
-                    <th style="text-align: right; width: 21%;">Total</th>
-                </tr>
-                {filas_productos}
-            </table>
-
-            <div class="line"></div>
-            <div class="totales">Subtotal: S/ {subtotal:.2f}</div>
-            <div class="totales">IGV (18%): S/ {igv:.2f}</div>
-            <div class="totales bold" style="font-size: 11px;">TOTAL A PAGAR: S/ {self.total_pagar:.2f}</div>
-
-            <div class="line"></div>
-            <table style="margin: 0; width: 100%;">
-                <tr>
-                    <td style="text-align: left; border: none; padding: 1px 0; width: 55%;">Forma de pago:</td>
-                    <td style="text-align: right; border: none; padding: 1px 0; width: 45%; white-space: nowrap;" class="bold">{metodo_pago}</td>
-                </tr>
-                <tr>
-                    <td style="text-align: left; border: none; padding: 1px 0; width: 55%;">Monto recibido:</td>
-                    <td style="text-align: right; border: none; padding: 1px 0; width: 45%; white-space: nowrap;" class="bold">S/ {monto_recibido:.2f}</td>
-                </tr>
-                <tr>
-                    <td style="text-align: left; border: none; padding: 1px 0; width: 55%;">Vuelto:</td>
-                    <td style="text-align: right; border: none; padding: 1px 0; width: 45%; white-space: nowrap;" class="bold">S/ {vuelto:.2f}</td>
-                </tr>
-            </table>
-
-            <div class="line"></div>
-            <div class="center">¡Gracias por su visita!</div>
-            <div class="center bold" style="margin-top: 3px;">SUMAQ ÑAN RESTAURANTE</div>
-            <div class="center" style="font-size: 9px;">La tradición también se sirve en la mesa.</div>
-        </body>
-        </html>
+        <html><body style="font-family: 'Courier New', Courier, monospace; font-size: 8pt; color: #000;">
+            <p align="center" style="margin: 0;">
+                <span style="font-size: 12pt; font-weight: bold;">SUMAQ ÑAN</span><br>
+                <span style="font-size: 9pt; font-weight: bold;">RESTAURANTE</span><br>
+                Sabores que nos unen<br>
+                RUC: 20601234567<br>
+                Av. Los Andes 123, Lima - Perú<br>
+                Teléfono: 987 654 321
+            </p>
+            <hr>
+            <p align="center" style="margin: 0;">
+                <b>{tipo_comprobante}</b><br>
+                <span style="font-size: 10pt; font-weight: bold;">{numero_comprobante}</span>
+            </p>
+            {filas((f"Fecha: {fecha_hora:%d/%m/%Y}", f"Hora: {fecha_hora:%H:%M}"))}
+            <hr>
+            <p style="margin: 0;">{"<br>".join(cliente)}</p>
+            <hr>
+            {filas(("<b>DESCRIPCIÓN</b>", "<b>IMPORTE</b>"))}
+            {detalle}
+            <hr>
+            {filas(("Op. gravada:", soles(op_gravada)), ("IGV (18%):", soles(igv)))}
+            {filas(("TOTAL A PAGAR:", soles(self.total_pagar)), negrita=True, tamano="10pt")}
+            <hr>
+            {filas(*pago)}
+            <hr>
+            <p align="center" style="margin: 0;">
+                <b>¡Gracias por su visita!</b><br>
+                La tradición también se sirve en la mesa.
+            </p>
+        </body></html>
         """
+
+        ancho_mm, margen_mm = 80, 4
+        margenes = QMarginsF(margen_mm, margen_mm, margen_mm, margen_mm)
+
+        def pagina(alto_mm):
+            tamano = QPageSize(QtCore.QSizeF(ancho_mm, alto_mm), QPageSize.Unit.Millimeter, "Ticket",
+                               QPageSize.SizeMatchPolicy.ExactMatch)
+            return QPageLayout(tamano, QPageLayout.Orientation.Portrait, margenes, QPageLayout.Unit.Millimeter)
 
         printer = QPrinter(QPrinter.PrinterMode.HighResolution)
         printer.setOutputFormat(QPrinter.OutputFormat.PdfFormat)
         printer.setOutputFileName(ruta_pdf)
+        printer.setPageLayout(pagina(1000))
 
-        page_size = QPageSize(QtCore.QSizeF(80, 220), QPageSize.Unit.Millimeter)
-        page_layout = QPageLayout(page_size, QPageLayout.Orientation.Portrait, QMarginsF(1, 1, 1, 1))
-        printer.setPageLayout(page_layout)
-
+        # El documento se diseña con las medidas reales de la impresora (los pt de la fuente son pt de papel)
         documento = QtGui.QTextDocument()
+        documento.documentLayout().setPaintDevice(printer)
+        documento.setDocumentMargin(0)
         documento.setHtml(html_ticket)
+        documento.setTextWidth(printer.pageRect(QPrinter.Unit.DevicePixel).width())
 
-        ancho_pts = printer.pageRect(QPrinter.Unit.Point).width()
-        documento.setPageSize(QtCore.QSizeF(ancho_pts, printer.pageRect(QPrinter.Unit.Point).height()))
+        # Alto del papel = alto del contenido + márgenes (+2 mm de holgura)
+        alto_contenido_mm = documento.size().height() / printer.resolution() * 25.4
+        printer.setPageLayout(pagina(alto_contenido_mm + 2 * margen_mm + 2))
+        documento.setPageSize(printer.pageRect(QPrinter.Unit.DevicePixel).size())
 
         getattr(documento, 'print')(printer)
 

@@ -46,6 +46,17 @@ def test_no_cobra_si_el_pedido_cambio_con_la_caja_abierta(vender, panel, bd, avi
     assert bd.q("SELECT COUNT(*) FROM ventas") == [(0,)]
 
 
+def test_el_comprobante_sale_en_una_sola_pagina_aunque_el_pedido_sea_largo(vender):
+    import re
+    platos = ["Anticuchos (1 Palito)", "Anticuchos (2 Palitos)", "Anticuchos (3 Palitos)", "Anticuchos (5 Palitos)",
+              "Brocheta de Pollo (1 Palito)", "Brocheta de Pollo (2 Palitos)", "Brocheta de Pollo (3 Palitos)",
+              "Chorizo (1 Unidad)", "Churrasco (200g aprox.)", "Chancho al Horno (200g aprox.)",
+              "Choclo con Queso", "Inca Kola", "Coca-Cola", "Agua"]
+    vender("MESA 06", [(plato, 1) for plato in platos])
+    pdf = open(os.path.join("boletas", os.listdir("boletas")[0]), "rb").read()
+    assert len(re.findall(rb"/Type\s*/Page[^s]", pdf)) == 1
+
+
 def test_la_misma_caja_no_cobra_dos_veces(vender, bd):
     caja = vender("MESA 05", [("Agua", 1)])
     caja.ui.btnPagar.click()

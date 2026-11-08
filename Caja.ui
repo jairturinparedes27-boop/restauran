@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Caja / Cobro</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="lblCaja">
@@ -104,7 +104,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Boleta Simple </string>
+     <string>Boleta Simple</string>
     </property>
    </widget>
    <widget class="QRadioButton" name="rbFactura">
@@ -140,17 +140,20 @@
      </font>
     </property>
     <property name="text">
-     <string>Datos del clientes: </string>
+     <string>Datos del cliente:</string>
     </property>
    </widget>
    <widget class="QLabel" name="lblDNI">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>40</x>
       <y>190</y>
-      <width>71</width>
-      <height>20</height>
+      <width>110</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
     <property name="font">
      <font>
@@ -164,11 +167,14 @@
    <widget class="QLabel" name="lblRazon">
     <property name="geometry">
      <rect>
-      <x>70</x>
+      <x>40</x>
       <y>220</y>
-      <width>91</width>
+      <width>110</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
     <property name="font">
      <font>
@@ -176,7 +182,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Razon Social:</string>
+     <string>Razón Social:</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="txtDNI">
@@ -236,11 +242,14 @@
    <widget class="QLabel" name="lblMetodo">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>10</x>
       <y>270</y>
-      <width>121</width>
-      <height>16</height>
+      <width>140</width>
+      <height>22</height>
      </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
     <property name="font">
      <font>
@@ -248,7 +257,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Metodo de Pago: </string>
+     <string>Método de Pago:</string>
     </property>
    </widget>
    <widget class="QComboBox" name="cmbMetodo">
@@ -269,11 +278,14 @@
    <widget class="QLabel" name="lblPaga">
     <property name="geometry">
      <rect>
-      <x>80</x>
+      <x>40</x>
       <y>310</y>
-      <width>71</width>
-      <height>16</height>
+      <width>110</width>
+      <height>20</height>
      </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
     <property name="font">
      <font>
@@ -287,11 +299,14 @@
    <widget class="QLabel" name="lblVuelto">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>40</x>
       <y>340</y>
-      <width>47</width>
-      <height>13</height>
+      <width>110</width>
+      <height>20</height>
      </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
     <property name="font">
      <font>

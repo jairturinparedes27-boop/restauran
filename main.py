@@ -1,5 +1,6 @@
 import sys
 from PyQt6 import QtWidgets
+from PyQt6.QtCore import QDate
 from PyQt6.QtWidgets import QMessageBox
 # Importamos tus interfaces convertidas
 from ui_Login import Ui_MainWindow as Ui_Login
@@ -11,6 +12,7 @@ from Dasboard.Usuario import GestionUsuarios
 from Dasboard.Clientes import GestionClientes
 from Dasboard.Productos import GestionProductos
 from Dasboard.Pedidos import GestionPedidos
+from Dasboard.estilo import ajustar_tabla
 
 # Botones del menú lateral
 MODULOS = ["btnInicio", "btnUsuario", "btnEmpleados", "btnClientes",
@@ -116,6 +118,20 @@ class VentanaDashboard(QtWidgets.QMainWindow):
         self.gestion_productos = GestionProductos(self.ui)
         self.gestor_pedidos = GestionPedidos(self.ui)
 
+        # Tablas sin números de fila; las columnas de texto ocupan el espacio libre
+        ajustar_tabla(self.ui.tableUsuario)
+        ajustar_tabla(self.ui.tableEmpleados, (1, 2))
+        ajustar_tabla(self.ui.tableClientes, (1, 3))
+        ajustar_tabla(self.ui.tableProductos, (1, 2))
+        ajustar_tabla(self.ui.tableInsumos, (1, 2))
+        ajustar_tabla(self.ui.tablePedidos, (1,))
+        ajustar_tabla(self.ui.tableReporte)
+        ajustar_tabla(self.ui.tablePedidosInicio)
+        ajustar_tabla(self.ui.tableStockInicio)
+
+        # Reportes: por defecto, las ventas de hoy
+        self.ui.dtInicioR.setDate(QDate.currentDate())
+        self.ui.dtFinR.setDate(QDate.currentDate())
 
     def aplicar_permisos(self, rol):
         permitidos, pagina = PERMISOS.get(rol, ([], None))

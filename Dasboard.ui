@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Sumaq Ñan - Sistema de Gestión</string>
   </property>
   <property name="animated">
    <bool>true</bool>
@@ -508,8 +508,8 @@ QGroupBox::title {
             <property name="geometry">
              <rect>
               <x>10</x>
-              <y>43</y>
-              <width>131</width>
+              <y>50</y>
+              <width>151</width>
               <height>20</height>
              </rect>
             </property>
@@ -578,10 +578,10 @@ QGroupBox::title {
            <widget class="QLabel" name="lblMesasInicio">
             <property name="geometry">
              <rect>
-              <x>20</x>
+              <x>10</x>
               <y>50</y>
-              <width>71</width>
-              <height>16</height>
+              <width>151</width>
+              <height>20</height>
              </rect>
             </property>
             <property name="font">
@@ -632,7 +632,7 @@ QGroupBox::title {
               <x>10</x>
               <y>10</y>
               <width>151</width>
-              <height>21</height>
+              <height>16</height>
              </rect>
             </property>
             <property name="font">
@@ -651,7 +651,7 @@ QGroupBox::title {
              <rect>
               <x>10</x>
               <y>50</y>
-              <width>81</width>
+              <width>151</width>
               <height>20</height>
              </rect>
             </property>
@@ -722,7 +722,7 @@ QGroupBox::title {
              <rect>
               <x>10</x>
               <y>50</y>
-              <width>81</width>
+              <width>151</width>
               <height>20</height>
              </rect>
             </property>
@@ -739,9 +739,9 @@ QGroupBox::title {
           <widget class="QTabWidget" name="tabWidget">
            <property name="geometry">
             <rect>
-             <x>20</x>
+             <x>30</x>
              <y>240</y>
-             <width>701</width>
+             <width>711</width>
              <height>281</height>
             </rect>
            </property>
@@ -758,7 +758,7 @@ QGroupBox::title {
            </property>
            <widget class="QWidget" name="tabUltimosPedidos">
             <attribute name="title">
-             <string>Ultimos Pedidos</string>
+             <string>Últimos Pedidos</string>
             </attribute>
             <widget class="QTableWidget" name="tablePedidosInicio">
              <property name="geometry">
@@ -840,7 +840,7 @@ QHeaderView::section {
            </widget>
            <widget class="QWidget" name="tabStockCritico">
             <attribute name="title">
-             <string>Stock Critico</string>
+             <string>Stock Crítico</string>
             </attribute>
             <widget class="QTableWidget" name="tableStockInicio">
              <property name="geometry">
@@ -880,7 +880,7 @@ QHeaderView::section {
              </attribute>
              <column>
               <property name="text">
-               <string>Codigo</string>
+               <string>Código</string>
               </property>
              </column>
              <column>
@@ -890,7 +890,7 @@ QHeaderView::section {
              </column>
              <column>
               <property name="text">
-               <string>Categoria</string>
+               <string>Categoría</string>
               </property>
              </column>
              <column>
@@ -911,7 +911,7 @@ QHeaderView::section {
             <rect>
              <x>30</x>
              <y>170</y>
-             <width>131</width>
+             <width>171</width>
              <height>35</height>
             </rect>
            </property>
@@ -956,9 +956,9 @@ QPushButton:pressed {
           <widget class="QPushButton" name="btnMenuInicio">
            <property name="geometry">
             <rect>
-             <x>180</x>
+             <x>210</x>
              <y>170</y>
-             <width>141</width>
+             <width>171</width>
              <height>35</height>
             </rect>
            </property>
@@ -1003,9 +1003,9 @@ QPushButton:pressed {
           <widget class="QPushButton" name="btnInsumosInicio">
            <property name="geometry">
             <rect>
-             <x>340</x>
+             <x>390</x>
              <y>170</y>
-             <width>141</width>
+             <width>171</width>
              <height>35</height>
             </rect>
            </property>
@@ -1050,9 +1050,9 @@ QPushButton:pressed {
           <widget class="QPushButton" name="btnReportesInicio">
            <property name="geometry">
             <rect>
-             <x>500</x>
+             <x>570</x>
              <y>170</y>
-             <width>141</width>
+             <width>171</width>
              <height>35</height>
             </rect>
            </property>
@@ -1099,7 +1099,7 @@ QPushButton:pressed {
           <widget class="QLabel" name="lblUsuario_2">
            <property name="geometry">
             <rect>
-             <x>10</x>
+             <x>20</x>
              <y>10</y>
              <width>231</width>
              <height>16</height>
@@ -1120,7 +1120,7 @@ QPushButton:pressed {
              <x>170</x>
              <y>110</y>
              <width>151</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -1135,11 +1135,14 @@ QPushButton:pressed {
           <widget class="QLabel" name="lblContrasenaU">
            <property name="geometry">
             <rect>
-             <x>70</x>
+             <x>10</x>
              <y>140</y>
-             <width>81</width>
-             <height>21</height>
+             <width>150</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -1153,11 +1156,14 @@ QPushButton:pressed {
           <widget class="QLabel" name="lblUsuarioU">
            <property name="geometry">
             <rect>
-             <x>100</x>
+             <x>10</x>
              <y>110</y>
-             <width>61</width>
-             <height>20</height>
+             <width>150</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -1174,7 +1180,7 @@ QPushButton:pressed {
              <x>170</x>
              <y>140</y>
              <width>151</width>
-             <height>21</height>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -1192,11 +1198,14 @@ QPushButton:pressed {
           <widget class="QLabel" name="lblDniEmpleadoU">
            <property name="geometry">
             <rect>
-             <x>50</x>
+             <x>10</x>
              <y>50</y>
-             <width>101</width>
-             <height>20</height>
+             <width>150</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -1210,7 +1219,7 @@ QPushButton:pressed {
           <widget class="QPushButton" name="btnEliminarU">
            <property name="geometry">
             <rect>
-             <x>350</x>
+             <x>310</x>
              <y>250</y>
              <width>75</width>
              <height>23</height>
@@ -1249,7 +1258,7 @@ QPushButton:pressed {
           <widget class="QPushButton" name="btnEditarU">
            <property name="geometry">
             <rect>
-             <x>260</x>
+             <x>220</x>
              <y>250</y>
              <width>75</width>
              <height>23</height>
@@ -1288,7 +1297,7 @@ QPushButton:pressed {
           <widget class="QPushButton" name="btnGuardarU">
            <property name="geometry">
             <rect>
-             <x>170</x>
+             <x>130</x>
              <y>250</y>
              <width>75</width>
              <height>23</height>
@@ -1327,7 +1336,7 @@ QPushButton:pressed {
           <widget class="QPushButton" name="btnNuevoU">
            <property name="geometry">
             <rect>
-             <x>80</x>
+             <x>40</x>
              <y>250</y>
              <width>75</width>
              <height>23</height>
@@ -1369,7 +1378,7 @@ QPushButton:pressed {
              <x>170</x>
              <y>50</y>
              <width>151</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -1384,10 +1393,10 @@ QPushButton:pressed {
           <widget class="QPushButton" name="btnBuscarU">
            <property name="geometry">
             <rect>
-             <x>340</x>
-             <y>44</y>
-             <width>101</width>
-             <height>21</height>
+             <x>331</x>
+             <y>50</y>
+             <width>90</width>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -1423,11 +1432,14 @@ QPushButton:pressed {
           <widget class="QLabel" name="lblCargoU">
            <property name="geometry">
             <rect>
-             <x>110</x>
+             <x>10</x>
              <y>170</y>
-             <width>51</width>
-             <height>21</height>
+             <width>150</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -1441,11 +1453,14 @@ QPushButton:pressed {
           <widget class="QLabel" name="lblEstadoU">
            <property name="geometry">
             <rect>
-             <x>100</x>
+             <x>10</x>
              <y>200</y>
-             <width>51</width>
-             <height>21</height>
+             <width>150</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -1471,8 +1486,8 @@ QPushButton:pressed {
             <rect>
              <x>170</x>
              <y>80</y>
-             <width>151</width>
-             <height>20</height>
+             <width>121</width>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -1490,10 +1505,10 @@ QPushButton:pressed {
           <widget class="QLineEdit" name="txtApellidoU">
            <property name="geometry">
             <rect>
-             <x>320</x>
+             <x>300</x>
              <y>80</y>
-             <width>161</width>
-             <height>20</height>
+             <width>121</width>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -1508,11 +1523,14 @@ QPushButton:pressed {
           <widget class="QLabel" name="lblNombreU">
            <property name="geometry">
             <rect>
-             <x>20</x>
+             <x>10</x>
              <y>80</y>
-             <width>141</width>
-             <height>20</height>
+             <width>150</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -1529,7 +1547,7 @@ QPushButton:pressed {
              <x>170</x>
              <y>170</y>
              <width>151</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -1549,7 +1567,7 @@ QPushButton:pressed {
             <rect>
              <x>40</x>
              <y>290</y>
-             <width>611</width>
+             <width>711</width>
              <height>221</height>
             </rect>
            </property>
@@ -1626,11 +1644,14 @@ QHeaderView::section {
           <widget class="QLabel" name="lblDniEmp">
            <property name="geometry">
             <rect>
-             <x>100</x>
+             <x>10</x>
              <y>50</y>
-             <width>31</width>
-             <height>16</height>
+             <width>130</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -1644,11 +1665,14 @@ QHeaderView::section {
           <widget class="QLabel" name="lblNombreEmp">
            <property name="geometry">
             <rect>
-             <x>70</x>
+             <x>10</x>
              <y>80</y>
-             <width>71</width>
-             <height>16</height>
+             <width>130</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -1662,11 +1686,14 @@ QHeaderView::section {
           <widget class="QLabel" name="lblApellidosEmp">
            <property name="geometry">
             <rect>
-             <x>70</x>
+             <x>10</x>
              <y>110</y>
-             <width>61</width>
-             <height>16</height>
+             <width>130</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -1680,11 +1707,14 @@ QHeaderView::section {
           <widget class="QLabel" name="lblTelefonoEmp">
            <property name="geometry">
             <rect>
-             <x>70</x>
+             <x>10</x>
              <y>140</y>
-             <width>71</width>
-             <height>16</height>
+             <width>130</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -1692,17 +1722,20 @@ QHeaderView::section {
             </font>
            </property>
            <property name="text">
-            <string>Telefono:</string>
+            <string>Teléfono:</string>
            </property>
           </widget>
           <widget class="QLabel" name="lblCargoEmp">
            <property name="geometry">
             <rect>
-             <x>90</x>
+             <x>10</x>
              <y>170</y>
-             <width>51</width>
-             <height>21</height>
+             <width>130</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -1941,7 +1974,7 @@ QHeaderView::section {
              <x>150</x>
              <y>50</y>
              <width>151</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
           </widget>
@@ -1951,7 +1984,7 @@ QHeaderView::section {
              <x>150</x>
              <y>140</y>
              <width>151</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
           </widget>
@@ -1961,7 +1994,7 @@ QHeaderView::section {
              <x>150</x>
              <y>110</y>
              <width>151</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
           </widget>
@@ -1971,7 +2004,7 @@ QHeaderView::section {
              <x>150</x>
              <y>80</y>
              <width>151</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
           </widget>
@@ -2008,11 +2041,14 @@ QHeaderView::section {
           <widget class="QLabel" name="lblCargoEmp_2">
            <property name="geometry">
             <rect>
-             <x>20</x>
+             <x>10</x>
              <y>200</y>
-             <width>121</width>
-             <height>21</height>
+             <width>130</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -2026,11 +2062,14 @@ QHeaderView::section {
           <widget class="QLabel" name="lblCargoEmp_3">
            <property name="geometry">
             <rect>
-             <x>90</x>
+             <x>10</x>
              <y>230</y>
-             <width>51</width>
-             <height>21</height>
+             <width>130</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -2058,17 +2097,20 @@ QHeaderView::section {
             </font>
            </property>
            <property name="text">
-            <string>Registro de Clientes </string>
+            <string>Registro de Clientes</string>
            </property>
           </widget>
           <widget class="QLabel" name="lblDocumento">
            <property name="geometry">
             <rect>
-             <x>120</x>
+             <x>10</x>
              <y>60</y>
-             <width>71</width>
-             <height>16</height>
+             <width>170</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -2082,11 +2124,14 @@ QHeaderView::section {
           <widget class="QLabel" name="lblNombrecli">
            <property name="geometry">
             <rect>
-             <x>40</x>
+             <x>10</x>
              <y>90</y>
-             <width>151</width>
-             <height>16</height>
+             <width>170</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -2094,17 +2139,20 @@ QHeaderView::section {
             </font>
            </property>
            <property name="text">
-            <string>Nombre/Razon Social: </string>
+            <string>Nombre / Razón Social:</string>
            </property>
           </widget>
           <widget class="QLabel" name="lblTelfonoCli">
            <property name="geometry">
             <rect>
-             <x>120</x>
+             <x>10</x>
              <y>120</y>
-             <width>71</width>
-             <height>16</height>
+             <width>170</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -2112,17 +2160,20 @@ QHeaderView::section {
             </font>
            </property>
            <property name="text">
-            <string>Telefono:</string>
+            <string>Teléfono:</string>
            </property>
           </widget>
           <widget class="QLabel" name="lblDireccionCLi">
            <property name="geometry">
             <rect>
-             <x>120</x>
+             <x>10</x>
              <y>150</y>
-             <width>71</width>
-             <height>16</height>
+             <width>170</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -2247,7 +2298,7 @@ QPushButton:pressed {
 }</string>
            </property>
            <property name="text">
-            <string>Edítar</string>
+            <string>Editar</string>
            </property>
           </widget>
           <widget class="QPushButton" name="btnEliminarCli">
@@ -2294,7 +2345,7 @@ QPushButton:pressed {
             <rect>
              <x>40</x>
              <y>250</y>
-             <width>561</width>
+             <width>711</width>
              <height>261</height>
             </rect>
            </property>
@@ -2349,7 +2400,7 @@ QHeaderView::section {
              <x>190</x>
              <y>60</y>
              <width>171</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -2364,7 +2415,7 @@ QHeaderView::section {
              <x>190</x>
              <y>90</y>
              <width>171</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -2379,7 +2430,7 @@ QHeaderView::section {
              <x>190</x>
              <y>120</y>
              <width>171</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -2394,7 +2445,7 @@ QHeaderView::section {
              <x>190</x>
              <y>150</y>
              <width>171</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -2408,9 +2459,9 @@ QHeaderView::section {
           <widget class="QLabel" name="lblTituloProducto">
            <property name="geometry">
             <rect>
-             <x>10</x>
+             <x>20</x>
              <y>10</y>
-             <width>101</width>
+             <width>231</width>
              <height>16</height>
             </rect>
            </property>
@@ -2420,17 +2471,20 @@ QHeaderView::section {
             </font>
            </property>
            <property name="text">
-            <string>Productos</string>
+            <string>Gestión de Productos</string>
            </property>
           </widget>
           <widget class="QLabel" name="lblCodigo">
            <property name="geometry">
             <rect>
-             <x>110</x>
+             <x>10</x>
              <y>40</y>
-             <width>51</width>
-             <height>20</height>
+             <width>160</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -2438,17 +2492,20 @@ QHeaderView::section {
             </font>
            </property>
            <property name="text">
-            <string>Codigo:</string>
+            <string>Código:</string>
            </property>
           </widget>
           <widget class="QLabel" name="lblNombre">
            <property name="geometry">
             <rect>
-             <x>100</x>
+             <x>10</x>
              <y>70</y>
-             <width>71</width>
-             <height>20</height>
+             <width>160</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -2456,17 +2513,20 @@ QHeaderView::section {
             </font>
            </property>
            <property name="text">
-            <string>Nombre: </string>
+            <string>Nombre:</string>
            </property>
           </widget>
           <widget class="QLabel" name="lblCategoria">
            <property name="geometry">
             <rect>
-             <x>90</x>
+             <x>10</x>
              <y>100</y>
-             <width>81</width>
-             <height>20</height>
+             <width>160</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -2474,17 +2534,20 @@ QHeaderView::section {
             </font>
            </property>
            <property name="text">
-            <string>Categoria:</string>
+            <string>Categoría:</string>
            </property>
           </widget>
           <widget class="QLabel" name="lblPrecioCompra">
            <property name="geometry">
             <rect>
-             <x>40</x>
+             <x>10</x>
              <y>130</y>
-             <width>121</width>
-             <height>16</height>
+             <width>160</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -2498,11 +2561,14 @@ QHeaderView::section {
           <widget class="QLabel" name="lblPrecioVenta">
            <property name="geometry">
             <rect>
-             <x>50</x>
+             <x>10</x>
              <y>160</y>
-             <width>111</width>
-             <height>16</height>
+             <width>160</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -2516,7 +2582,7 @@ QHeaderView::section {
           <widget class="QPushButton" name="btnNuevoPRO">
            <property name="geometry">
             <rect>
-             <x>50</x>
+             <x>40</x>
              <y>230</y>
              <width>75</width>
              <height>23</height>
@@ -2555,7 +2621,7 @@ QPushButton:pressed {
           <widget class="QPushButton" name="btnGuardarPRO">
            <property name="geometry">
             <rect>
-             <x>150</x>
+             <x>130</x>
              <y>230</y>
              <width>75</width>
              <height>23</height>
@@ -2594,7 +2660,7 @@ QPushButton:pressed {
           <widget class="QPushButton" name="btnEditarPRO">
            <property name="geometry">
             <rect>
-             <x>250</x>
+             <x>220</x>
              <y>230</y>
              <width>75</width>
              <height>23</height>
@@ -2633,7 +2699,7 @@ QPushButton:pressed {
           <widget class="QPushButton" name="btnEliminarPRO">
            <property name="geometry">
             <rect>
-             <x>350</x>
+             <x>310</x>
              <y>230</y>
              <width>75</width>
              <height>23</height>
@@ -2672,18 +2738,11 @@ QPushButton:pressed {
           <widget class="QTableWidget" name="tableProductos">
            <property name="geometry">
             <rect>
-             <x>30</x>
+             <x>40</x>
              <y>280</y>
-             <width>621</width>
+             <width>711</width>
              <height>241</height>
             </rect>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
            </property>
            <property name="styleSheet">
             <string notr="true">QTableWidget {
@@ -2711,7 +2770,7 @@ QHeaderView::section {
            </attribute>
            <column>
             <property name="text">
-             <string>Codigo</string>
+             <string>Código</string>
             </property>
            </column>
            <column>
@@ -2721,7 +2780,7 @@ QHeaderView::section {
            </column>
            <column>
             <property name="text">
-             <string>Categoria</string>
+             <string>Categoría</string>
             </property>
            </column>
            <column>
@@ -2744,9 +2803,9 @@ QHeaderView::section {
            <property name="geometry">
             <rect>
              <x>180</x>
-             <y>39</y>
+             <y>40</y>
              <width>211</width>
-             <height>21</height>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -2761,7 +2820,7 @@ QHeaderView::section {
              <x>180</x>
              <y>70</y>
              <width>211</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -2779,11 +2838,6 @@ QHeaderView::section {
              <height>22</height>
             </rect>
            </property>
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-            </font>
-           </property>
           </widget>
           <widget class="QLineEdit" name="txtPrecioCompraPRO">
            <property name="geometry">
@@ -2791,7 +2845,7 @@ QHeaderView::section {
              <x>180</x>
              <y>130</y>
              <width>211</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -2806,7 +2860,7 @@ QHeaderView::section {
              <x>180</x>
              <y>160</y>
              <width>211</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -2818,11 +2872,14 @@ QHeaderView::section {
           <widget class="QLabel" name="lblStock">
            <property name="geometry">
             <rect>
-             <x>120</x>
+             <x>10</x>
              <y>190</y>
-             <width>47</width>
-             <height>13</height>
+             <width>160</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -2839,7 +2896,7 @@ QHeaderView::section {
              <x>180</x>
              <y>190</y>
              <width>211</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -2851,10 +2908,10 @@ QHeaderView::section {
           <widget class="QPushButton" name="btnCategoriaPRO">
            <property name="geometry">
             <rect>
-             <x>410</x>
+             <x>400</x>
              <y>100</y>
              <width>171</width>
-             <height>21</height>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -2884,7 +2941,7 @@ QPushButton:pressed {
 }</string>
            </property>
            <property name="text">
-            <string>Gestionar Categoria</string>
+            <string>Gestionar Categorías</string>
            </property>
           </widget>
          </widget>
@@ -2904,17 +2961,20 @@ QPushButton:pressed {
             </font>
            </property>
            <property name="text">
-            <string>Gestion de Insumos </string>
+            <string>Gestión de Insumos</string>
            </property>
           </widget>
           <widget class="QLabel" name="lblCodigoI">
            <property name="geometry">
             <rect>
-             <x>160</x>
+             <x>10</x>
              <y>50</y>
-             <width>51</width>
-             <height>20</height>
+             <width>200</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -2922,17 +2982,20 @@ QPushButton:pressed {
             </font>
            </property>
            <property name="text">
-            <string>Codigo:</string>
+            <string>Código:</string>
            </property>
           </widget>
           <widget class="QLabel" name="lblNombreI">
            <property name="geometry">
             <rect>
-             <x>80</x>
+             <x>10</x>
              <y>80</y>
-             <width>131</width>
-             <height>16</height>
+             <width>200</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -2946,11 +3009,14 @@ QPushButton:pressed {
           <widget class="QLabel" name="lblCategoriaI">
            <property name="geometry">
             <rect>
-             <x>140</x>
+             <x>10</x>
              <y>110</y>
-             <width>71</width>
-             <height>20</height>
+             <width>200</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -2958,17 +3024,20 @@ QPushButton:pressed {
             </font>
            </property>
            <property name="text">
-            <string>Categoria:</string>
+            <string>Categoría:</string>
            </property>
           </widget>
           <widget class="QLabel" name="lblStockI">
            <property name="geometry">
             <rect>
-             <x>120</x>
+             <x>10</x>
              <y>140</y>
-             <width>101</width>
-             <height>16</height>
+             <width>200</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -2982,11 +3051,14 @@ QPushButton:pressed {
           <widget class="QLabel" name="lblPrecioI">
            <property name="geometry">
             <rect>
-             <x>110</x>
-             <y>210</y>
-             <width>111</width>
-             <height>16</height>
+             <x>10</x>
+             <y>200</y>
+             <width>200</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -3000,11 +3072,14 @@ QPushButton:pressed {
           <widget class="QLabel" name="lblUnidadI">
            <property name="geometry">
             <rect>
-             <x>90</x>
+             <x>10</x>
              <y>170</y>
-             <width>131</width>
-             <height>16</height>
+             <width>200</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -3018,8 +3093,8 @@ QPushButton:pressed {
           <widget class="QPushButton" name="btnEliminarI">
            <property name="geometry">
             <rect>
-             <x>360</x>
-             <y>260</y>
+             <x>310</x>
+             <y>250</y>
              <width>75</width>
              <height>23</height>
             </rect>
@@ -3057,8 +3132,8 @@ QPushButton:pressed {
           <widget class="QPushButton" name="btnGuardarI">
            <property name="geometry">
             <rect>
-             <x>160</x>
-             <y>260</y>
+             <x>130</x>
+             <y>250</y>
              <width>75</width>
              <height>23</height>
             </rect>
@@ -3096,8 +3171,8 @@ QPushButton:pressed {
           <widget class="QPushButton" name="btnNuevoI">
            <property name="geometry">
             <rect>
-             <x>60</x>
-             <y>260</y>
+             <x>40</x>
+             <y>250</y>
              <width>75</width>
              <height>23</height>
             </rect>
@@ -3135,8 +3210,8 @@ QPushButton:pressed {
           <widget class="QPushButton" name="btnEditarI">
            <property name="geometry">
             <rect>
-             <x>260</x>
-             <y>260</y>
+             <x>220</x>
+             <y>250</y>
              <width>75</width>
              <height>23</height>
             </rect>
@@ -3177,7 +3252,7 @@ QPushButton:pressed {
              <x>220</x>
              <y>50</y>
              <width>161</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
           </widget>
@@ -3187,7 +3262,7 @@ QPushButton:pressed {
              <x>220</x>
              <y>140</y>
              <width>161</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
           </widget>
@@ -3197,7 +3272,7 @@ QPushButton:pressed {
              <x>220</x>
              <y>80</y>
              <width>161</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
           </widget>
@@ -3225,9 +3300,9 @@ QPushButton:pressed {
            <property name="geometry">
             <rect>
              <x>220</x>
-             <y>210</y>
+             <y>200</y>
              <width>161</width>
-             <height>20</height>
+             <height>22</height>
             </rect>
            </property>
           </widget>
@@ -3235,9 +3310,9 @@ QPushButton:pressed {
            <property name="geometry">
             <rect>
              <x>40</x>
-             <y>300</y>
+             <y>290</y>
              <width>711</width>
-             <height>192</height>
+             <height>202</height>
             </rect>
            </property>
            <property name="styleSheet">
@@ -3273,7 +3348,7 @@ QHeaderView::section {
            </column>
            <column>
             <property name="text">
-             <string>Categoria</string>
+             <string>Categoría</string>
             </property>
            </column>
            <column>
@@ -3360,7 +3435,7 @@ S/ 0.00</string>
           <widget class="QPushButton" name="btnMesa3">
            <property name="geometry">
             <rect>
-             <x>380</x>
+             <x>390</x>
              <y>60</y>
              <width>161</width>
              <height>91</height>
@@ -3420,7 +3495,7 @@ S/ 0.00</string>
           <widget class="QPushButton" name="btnMesa6">
            <property name="geometry">
             <rect>
-             <x>380</x>
+             <x>390</x>
              <y>170</y>
              <width>161</width>
              <height>91</height>
@@ -3440,7 +3515,7 @@ S/ 0.00</string>
           <widget class="QPushButton" name="btnLlevar">
            <property name="geometry">
             <rect>
-             <x>550</x>
+             <x>570</x>
              <y>60</y>
              <width>161</width>
              <height>91</height>
@@ -3472,8 +3547,27 @@ Activo</string>
              <pointsize>11</pointsize>
             </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color: #2980B9;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 2px 8px;
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+QPushButton:hover {
+    background-color: #1F618D;
+}
+
+QPushButton:pressed {
+    background-color: #154360;
+}</string>
+           </property>
            <property name="text">
-            <string>&lt;--  Volver </string>
+            <string>← Volver</string>
            </property>
           </widget>
           <widget class="QLabel" name="lblAtender">
@@ -3497,11 +3591,14 @@ Activo</string>
           <widget class="QLabel" name="lblBuscarPlato">
            <property name="geometry">
             <rect>
-             <x>30</x>
+             <x>10</x>
              <y>80</y>
-             <width>161</width>
-             <height>21</height>
+             <width>170</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -3518,7 +3615,7 @@ Activo</string>
              <x>190</x>
              <y>80</y>
              <width>181</width>
-             <height>21</height>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -3530,11 +3627,14 @@ Activo</string>
           <widget class="QLabel" name="lblCantidad">
            <property name="geometry">
             <rect>
-             <x>120</x>
+             <x>10</x>
              <y>120</y>
-             <width>61</width>
-             <height>20</height>
+             <width>170</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -3542,7 +3642,7 @@ Activo</string>
             </font>
            </property>
            <property name="text">
-            <string>Cantidad: </string>
+            <string>Cantidad:</string>
            </property>
           </widget>
           <widget class="QPushButton" name="btnAgregarPedido">
@@ -3558,6 +3658,25 @@ Activo</string>
             <font>
              <pointsize>11</pointsize>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color: #27AE60;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 2px 8px;
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+QPushButton:hover {
+    background-color: #1E8449;
+}
+
+QPushButton:pressed {
+    background-color: #145A32;
+}</string>
            </property>
            <property name="text">
             <string>Agregar Pedido</string>
@@ -3576,6 +3695,25 @@ Activo</string>
             <font>
              <pointsize>11</pointsize>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color: #E74C3C;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 2px 8px;
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+QPushButton:hover {
+    background-color: #C0392B;
+}
+
+QPushButton:pressed {
+    background-color: #922B21;
+}</string>
            </property>
            <property name="text">
             <string>Quitar Producto</string>
@@ -3616,7 +3754,7 @@ QHeaderView::section {
            </attribute>
            <column>
             <property name="text">
-             <string>Codigo</string>
+             <string>Código</string>
             </property>
            </column>
            <column>
@@ -3631,12 +3769,12 @@ QHeaderView::section {
            </column>
            <column>
             <property name="text">
-             <string>Pre. Unitario</string>
+             <string>P. Unitario</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>SubTotal</string>
+             <string>Subtotal</string>
             </property>
            </column>
           </widget>
@@ -3649,21 +3787,24 @@ QHeaderView::section {
              <height>21</height>
             </rect>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
            <property name="font">
             <font>
              <pointsize>11</pointsize>
             </font>
            </property>
            <property name="text">
-            <string>TOTAL: S/ 00.00</string>
+            <string>TOTAL: S/ 0.00</string>
            </property>
           </widget>
           <widget class="QPushButton" name="btnEnviarCocina">
            <property name="geometry">
             <rect>
-             <x>50</x>
+             <x>20</x>
              <y>460</y>
-             <width>131</width>
+             <width>141</width>
              <height>31</height>
             </rect>
            </property>
@@ -3671,6 +3812,25 @@ QHeaderView::section {
             <font>
              <pointsize>11</pointsize>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color: #E67E22;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 2px 8px;
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+QPushButton:hover {
+    background-color: #D35400;
+}
+
+QPushButton:pressed {
+    background-color: #A04000;
+}</string>
            </property>
            <property name="text">
             <string>Enviar a Cocina</string>
@@ -3679,9 +3839,9 @@ QHeaderView::section {
           <widget class="QPushButton" name="BtnPreCuenta">
            <property name="geometry">
             <rect>
-             <x>200</x>
+             <x>175</x>
              <y>460</y>
-             <width>131</width>
+             <width>141</width>
              <height>31</height>
             </rect>
            </property>
@@ -3690,16 +3850,35 @@ QHeaderView::section {
              <pointsize>11</pointsize>
             </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color: #E74C3C;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 2px 8px;
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+QPushButton:hover {
+    background-color: #C0392B;
+}
+
+QPushButton:pressed {
+    background-color: #922B21;
+}</string>
+           </property>
            <property name="text">
-            <string>Pre-Cuenta </string>
+            <string>Cancelar Pedido</string>
            </property>
           </widget>
           <widget class="QPushButton" name="btnCobrar">
            <property name="geometry">
             <rect>
-             <x>350</x>
+             <x>330</x>
              <y>460</y>
-             <width>121</width>
+             <width>141</width>
              <height>31</height>
             </rect>
            </property>
@@ -3707,6 +3886,25 @@ QHeaderView::section {
             <font>
              <pointsize>11</pointsize>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color: #27AE60;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 2px 8px;
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+QPushButton:hover {
+    background-color: #1E8449;
+}
+
+QPushButton:pressed {
+    background-color: #145A32;
+}</string>
            </property>
            <property name="text">
             <string>Cobrar</string>
@@ -3718,7 +3916,7 @@ QHeaderView::section {
              <x>190</x>
              <y>120</y>
              <width>181</width>
-             <height>21</height>
+             <height>22</height>
             </rect>
            </property>
            <property name="font">
@@ -3733,8 +3931,8 @@ QHeaderView::section {
            <property name="geometry">
             <rect>
              <x>20</x>
-             <y>20</y>
-             <width>221</width>
+             <y>10</y>
+             <width>300</width>
              <height>16</height>
             </rect>
            </property>
@@ -3744,7 +3942,7 @@ QHeaderView::section {
             </font>
            </property>
            <property name="text">
-            <string>Reportes Ventas e Historial</string>
+            <string>Reportes de Ventas e Historial</string>
            </property>
           </widget>
           <widget class="QDateEdit" name="dtInicioR">
@@ -3780,11 +3978,14 @@ QHeaderView::section {
           <widget class="QLabel" name="lblFechaInicioR">
            <property name="geometry">
             <rect>
-             <x>66</x>
+             <x>10</x>
              <y>70</y>
-             <width>81</width>
-             <height>21</height>
+             <width>140</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -3798,11 +3999,14 @@ QHeaderView::section {
           <widget class="QLabel" name="lblFechaFinR">
            <property name="geometry">
             <rect>
-             <x>80</x>
+             <x>10</x>
              <y>100</y>
-             <width>71</width>
-             <height>20</height>
+             <width>140</width>
+             <height>22</height>
             </rect>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
            <property name="font">
             <font>
@@ -3816,8 +4020,8 @@ QHeaderView::section {
           <widget class="QPushButton" name="btnFiltrarR">
            <property name="geometry">
             <rect>
-             <x>150</x>
-             <y>150</y>
+             <x>160</x>
+             <y>140</y>
              <width>81</width>
              <height>23</height>
             </rect>
@@ -3894,7 +4098,7 @@ QPushButton:pressed {
           <widget class="QPushButton" name="btnPdfR">
            <property name="geometry">
             <rect>
-             <x>170</x>
+             <x>175</x>
              <y>480</y>
              <width>121</width>
              <height>31</height>
@@ -3933,9 +4137,9 @@ QPushButton:pressed {
           <widget class="QTableWidget" name="tableReporte">
            <property name="geometry">
             <rect>
-             <x>20</x>
+             <x>40</x>
              <y>190</y>
-             <width>611</width>
+             <width>711</width>
              <height>221</height>
             </rect>
            </property>
@@ -3949,7 +4153,7 @@ QPushButton:pressed {
            </column>
            <column>
             <property name="text">
-             <string>Fecha /Hora</string>
+             <string>Fecha / Hora</string>
             </property>
            </column>
            <column>
@@ -3976,9 +4180,9 @@ QPushButton:pressed {
           <widget class="QLabel" name="lblTotalR">
            <property name="geometry">
             <rect>
-             <x>50</x>
+             <x>40</x>
              <y>430</y>
-             <width>141</width>
+             <width>150</width>
              <height>21</height>
             </rect>
            </property>
@@ -3988,7 +4192,7 @@ QPushButton:pressed {
             </font>
            </property>
            <property name="text">
-            <string>Total Recaudado S/. </string>
+            <string>Total recaudado S/:</string>
            </property>
           </widget>
           <widget class="QLineEdit" name="txtTotalR">
@@ -4030,7 +4234,7 @@ color: white;
 </string>
      </property>
      <property name="text">
-      <string> SISTEMA DE GESTION DE RESTAURANTE SUMAQ ÑAN</string>
+      <string> SISTEMA DE GESTIÓN DE RESTAURANTE SUMAQ ÑAN</string>
      </property>
     </widget>
     <widget class="QLabel" name="lblUsuario">

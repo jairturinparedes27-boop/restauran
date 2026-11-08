@@ -11,17 +11,20 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Gestión de Categorías</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="lblGestionCategoria">
     <property name="geometry">
      <rect>
-      <x>70</x>
+      <x>0</x>
       <y>10</y>
-      <width>191</width>
-      <height>16</height>
+      <width>287</width>
+      <height>20</height>
      </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
     <property name="font">
      <font>
@@ -29,16 +32,16 @@
      </font>
     </property>
     <property name="text">
-     <string>Gestion de Categorias</string>
+     <string>Gestión de Categorías</string>
     </property>
    </widget>
    <widget class="QLabel" name="lblNombreCategoria">
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>43</y>
-      <width>61</width>
-      <height>20</height>
+      <y>40</y>
+      <width>60</width>
+      <height>22</height>
      </rect>
     </property>
     <property name="font">
@@ -213,17 +216,17 @@ QHeaderView::section {
     </column>
     <column>
      <property name="text">
-      <string>Categoria</string>
+      <string>Categoría</string>
      </property>
     </column>
    </widget>
    <widget class="QLineEdit" name="txtNombrecat">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>95</x>
       <y>40</y>
-      <width>161</width>
-      <height>20</height>
+      <width>166</width>
+      <height>22</height>
      </rect>
     </property>
    </widget>

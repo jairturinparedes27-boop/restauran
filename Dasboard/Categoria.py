@@ -1,6 +1,7 @@
 from PyQt6 import QtWidgets
 from ui_Categoria import Ui_MainWindow
 from database import GestorBaseDatos
+from Dasboard.estilo import ajustar_tabla
 
 class VentanaCategorias(QtWidgets.QMainWindow):  # QMainWindow porque ui_Categoria usa setCentralWidget
     def __init__(self):
@@ -27,6 +28,7 @@ class VentanaCategorias(QtWidgets.QMainWindow):  # QMainWindow porque ui_Categor
             self.ui.btnNuevoCat.clicked.connect(self.limpiar)
 
         self.cargar_tabla()
+        ajustar_tabla(self.ui.tableCategoria, (1,))
 
     def cargar_tabla(self):
         """Carga las categorías de la base de datos a la tabla"""

@@ -4,13 +4,13 @@ from database import GestorBaseDatos
 from Dasboard.Resumen import GestionResumen
 
 class GestionPedidos:
-    def __init__(self, ui_dashboard):
+    def __init__(self, ui_dashboard, usuario=""):
         self.ui = ui_dashboard
         self.db = GestorBaseDatos()
         self.mesa_actual = ""
-        
+
         # Inicializamos el gestor del resumen para manejar los platos por mesa
-        self.gestor_resumen = GestionResumen(self.ui)
+        self.gestor_resumen = GestionResumen(self.ui, usuario)
         
         # Conectar los botones del salón y actualizar los colores/estados al iniciar
         self.conectar_eventos()

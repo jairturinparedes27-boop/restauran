@@ -2214,7 +2214,7 @@ class Ui_MainWindow(object):
         self.lblMesasInicio.setText(_translate("MainWindow", "34 Mesas"))
         self.label_7.setText(_translate("MainWindow", "Platos en la carta"))
         self.lblPlatosInicio.setText(_translate("MainWindow", "25 Activos"))
-        self.label_8.setText(_translate("MainWindow", "Insumos bajo stock"))
+        self.label_8.setText(_translate("MainWindow", "Stock crítico"))
         self.lblStockInicio.setText(_translate("MainWindow", "3 Alertas"))
         item = self.tablePedidosInicio.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Nro. Pedido"))

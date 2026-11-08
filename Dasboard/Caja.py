@@ -12,7 +12,7 @@ METODOS_PAGO = ["Efectivo", "Tarjeta", "Yape", "Plin"]
 
 
 class VentanaCaja(QtWidgets.QMainWindow):
-    def __init__(self, mesa_actual, total_pagar, callback_exito=None):
+    def __init__(self, mesa_actual, total_pagar, callback_exito=None, usuario=""):
         super().__init__()
         self.ui = UiCajaWindow()
         self.ui.setupUi(self)
@@ -20,6 +20,7 @@ class VentanaCaja(QtWidgets.QMainWindow):
         self.mesa_actual = mesa_actual
         self.total_pagar = round(total_pagar, 2)
         self.callback_exito = callback_exito
+        self.usuario = usuario  # quien cobra
         self.pago_realizado = False  # Controla si ya se cobró
 
         # Textos iniciales
@@ -183,10 +184,11 @@ class VentanaCaja(QtWidgets.QMainWindow):
 
                     cursor.execute("""
                         INSERT INTO ventas (fecha, mesa, tipo_comprobante, serie, numero, cliente_documento,
-                                            cliente_nombre, metodo_pago, total, monto_recibido, vuelto)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                                            cliente_nombre, metodo_pago, total, monto_recibido, vuelto, usuario)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """, (ahora.strftime("%Y-%m-%d %H:%M:%S"), self.mesa_actual, tipo, serie, numero,
-                          cliente_doc, cliente_nombre, metodo_pago, self.total_pagar, monto_recibido, vuelto))
+                          cliente_doc, cliente_nombre, metodo_pago, self.total_pagar, monto_recibido, vuelto,
+                          self.usuario))
 
                     # El detalle se copia al historial antes de liberar la mesa
                     cursor.execute("""
@@ -331,6 +333,7 @@ class VentanaCaja(QtWidgets.QMainWindow):
             <div>Cliente: {escape(cliente_nombre)}</div>
             <div>Doc: {escape(cliente_doc)}</div>
             <div>Mesa: {escape(self.mesa_actual)}</div>
+            {f'<div>Atendido por: {escape(self.usuario)}</div>' if self.usuario else ''}
 
             <div class="line"></div>
             <table>

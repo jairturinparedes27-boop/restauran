@@ -180,9 +180,15 @@ class GestorBaseDatos:
                     total REAL NOT NULL,
                     monto_recibido REAL NOT NULL,
                     vuelto REAL NOT NULL,
+                    usuario TEXT,
                     UNIQUE (serie, numero)
                 )
             """)
+            # Bases creadas antes de registrar quién cobra cada venta
+            cursor.execute("PRAGMA table_info(ventas)")
+            if "usuario" not in [columna[1] for columna in cursor.fetchall()]:
+                cursor.execute("ALTER TABLE ventas ADD COLUMN usuario TEXT")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_ventas_fecha ON ventas (fecha)")
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS detalle_ventas (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,

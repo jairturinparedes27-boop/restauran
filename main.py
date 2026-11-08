@@ -1,6 +1,5 @@
 import sys
 from PyQt6 import QtWidgets
-from PyQt6.QtCore import QDate
 from PyQt6.QtWidgets import QMessageBox
 # Importamos tus interfaces convertidas
 from ui_Login import Ui_MainWindow as Ui_Login
@@ -12,6 +11,8 @@ from Dasboard.Usuario import GestionUsuarios
 from Dasboard.Clientes import GestionClientes
 from Dasboard.Productos import GestionProductos
 from Dasboard.Pedidos import GestionPedidos
+from Dasboard.Inicio import GestionInicio
+from Dasboard.Reportes import GestionReportes
 from Dasboard.estilo import ajustar_tabla
 
 # Botones del menú lateral
@@ -79,18 +80,19 @@ class VentanaLogin(QtWidgets.QMainWindow):
         else:
             nombre_completo = usuario.capitalize()
 
-        self.dashboard = VentanaDashboard(rol_usuario, nombre_completo)
+        self.dashboard = VentanaDashboard(rol_usuario, nombre_completo, usuario)
         self.dashboard.show()
         self.close()
 
 
 class VentanaDashboard(QtWidgets.QMainWindow):
-    def __init__(self, rol_usuario, nombre_usuario="Usuario"):
+    def __init__(self, rol_usuario, nombre_usuario="Usuario", usuario=""):
         super().__init__()
         self.ui = Ui_Dashboard()
         self.ui.setupUi(self)
 
         self.rol_actual = rol_usuario
+        self.usuario = usuario  # nombre de usuario con el que se inició sesión
 
         # Mostramos el nombre real de la persona en lugar del rol
         self.ui.lblUsuario.setText(f" USUARIO: {nombre_usuario}")
@@ -116,7 +118,9 @@ class VentanaDashboard(QtWidgets.QMainWindow):
         self.gestion_usuarios = GestionUsuarios(self.ui)
         self.gestion_clientes = GestionClientes(self.ui)
         self.gestion_productos = GestionProductos(self.ui)
-        self.gestor_pedidos = GestionPedidos(self.ui)
+        self.gestor_pedidos = GestionPedidos(self.ui, usuario)
+        self.gestion_inicio = GestionInicio(self.ui)
+        self.gestion_reportes = GestionReportes(self.ui)
 
         # Tablas sin números de fila; las columnas de texto ocupan el espacio libre
         ajustar_tabla(self.ui.tableUsuario)
@@ -125,13 +129,9 @@ class VentanaDashboard(QtWidgets.QMainWindow):
         ajustar_tabla(self.ui.tableProductos, (1, 2))
         ajustar_tabla(self.ui.tableInsumos, (1, 2))
         ajustar_tabla(self.ui.tablePedidos, (1,))
-        ajustar_tabla(self.ui.tableReporte)
+        ajustar_tabla(self.ui.tableReporte, (1, 4))
         ajustar_tabla(self.ui.tablePedidosInicio)
-        ajustar_tabla(self.ui.tableStockInicio)
-
-        # Reportes: por defecto, las ventas de hoy
-        self.ui.dtInicioR.setDate(QDate.currentDate())
-        self.ui.dtFinR.setDate(QDate.currentDate())
+        ajustar_tabla(self.ui.tableStockInicio, (1, 2))
 
     def aplicar_permisos(self, rol):
         permitidos, pagina = PERMISOS.get(rol, ([], None))

@@ -20,7 +20,7 @@ import time
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent
-IGNORAR = {".git", "__pycache__", ".venv", "venv"}
+IGNORAR = {".git", "__pycache__", ".venv", "venv", "tests", ".pytest_cache"}
 
 # .ui de Qt Designer -> módulo Python que importa la app
 INTERFACES = {
@@ -86,7 +86,7 @@ def comando_app(rol):
     codigo = (
         "import sys; from PyQt6 import QtWidgets; import main; "
         "app = QtWidgets.QApplication(sys.argv); "
-        f"v = main.VentanaDashboard({rol!r}, 'Modo desarrollo'); v.show(); "
+        f"v = main.VentanaDashboard({rol!r}, 'Modo desarrollo', 'desarrollo'); v.show(); "
         "sys.exit(app.exec())"
     )
     return [sys.executable, "-c", codigo]

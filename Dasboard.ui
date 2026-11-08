@@ -714,7 +714,7 @@ QGroupBox::title {
              </font>
             </property>
             <property name="text">
-             <string>Insumos bajo stock</string>
+             <string>Stock crítico</string>
             </property>
            </widget>
            <widget class="QLabel" name="lblStockInicio">

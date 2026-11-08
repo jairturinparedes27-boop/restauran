@@ -4,10 +4,11 @@ from datetime import datetime
 from Dasboard.Caja import VentanaCaja
 
 class GestionResumen:
-    def __init__(self, ui_dashboard):
+    def __init__(self, ui_dashboard, usuario=""):
         self.ui = ui_dashboard
         self.db = GestorBaseDatos()
         self.mesa_actual = ""
+        self.usuario = usuario  # quien inició sesión: queda registrado en cada venta
 
         self.tabla = getattr(self.ui, "tablePedidos", None)
         if self.tabla:
@@ -356,5 +357,6 @@ class GestionResumen:
                 
             self.actualizar_tarjetas_mesas()
 
-        self.ventana_caja = VentanaCaja(self.mesa_actual, total, callback_exito=terminar_cobro_y_volver)
+        self.ventana_caja = VentanaCaja(self.mesa_actual, total, callback_exito=terminar_cobro_y_volver,
+                                        usuario=self.usuario)
         self.ventana_caja.show()

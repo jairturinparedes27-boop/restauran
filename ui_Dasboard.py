@@ -1741,80 +1741,100 @@ class Ui_MainWindow(object):
         self.pagePedido = QtWidgets.QWidget()
         self.pagePedido.setObjectName("pagePedido")
         self.lblPedidos = QtWidgets.QLabel(parent=self.pagePedido)
-        self.lblPedidos.setGeometry(QtCore.QRect(20, 10, 141, 20))
+        self.lblPedidos.setGeometry(QtCore.QRect(20, 10, 321, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.lblPedidos.setFont(font)
         self.lblPedidos.setObjectName("lblPedidos")
-        self.lblMesaP = QtWidgets.QLabel(parent=self.pagePedido)
-        self.lblMesaP.setGeometry(QtCore.QRect(40, 70, 101, 16))
+        self.btnMesa1 = QtWidgets.QPushButton(parent=self.pagePedido)
+        self.btnMesa1.setGeometry(QtCore.QRect(30, 60, 161, 91))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.btnMesa1.setFont(font)
+        self.btnMesa1.setObjectName("btnMesa1")
+        self.btnMesa2 = QtWidgets.QPushButton(parent=self.pagePedido)
+        self.btnMesa2.setGeometry(QtCore.QRect(210, 60, 161, 91))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.btnMesa2.setFont(font)
+        self.btnMesa2.setObjectName("btnMesa2")
+        self.btnMesa3 = QtWidgets.QPushButton(parent=self.pagePedido)
+        self.btnMesa3.setGeometry(QtCore.QRect(380, 60, 161, 91))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.btnMesa3.setFont(font)
+        self.btnMesa3.setObjectName("btnMesa3")
+        self.btnMesa4 = QtWidgets.QPushButton(parent=self.pagePedido)
+        self.btnMesa4.setGeometry(QtCore.QRect(30, 170, 161, 91))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.btnMesa4.setFont(font)
+        self.btnMesa4.setObjectName("btnMesa4")
+        self.btnMesa5 = QtWidgets.QPushButton(parent=self.pagePedido)
+        self.btnMesa5.setGeometry(QtCore.QRect(210, 170, 161, 91))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.btnMesa5.setFont(font)
+        self.btnMesa5.setObjectName("btnMesa5")
+        self.btnMesa6 = QtWidgets.QPushButton(parent=self.pagePedido)
+        self.btnMesa6.setGeometry(QtCore.QRect(380, 170, 161, 91))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.btnMesa6.setFont(font)
+        self.btnMesa6.setObjectName("btnMesa6")
+        self.btnLlevar = QtWidgets.QPushButton(parent=self.pagePedido)
+        self.btnLlevar.setGeometry(QtCore.QRect(550, 60, 161, 91))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.btnLlevar.setFont(font)
+        self.btnLlevar.setObjectName("btnLlevar")
+        self.StackedWidget.addWidget(self.pagePedido)
+        self.pageResumen = QtWidgets.QWidget()
+        self.pageResumen.setObjectName("pageResumen")
+        self.btnVolver = QtWidgets.QPushButton(parent=self.pageResumen)
+        self.btnVolver.setGeometry(QtCore.QRect(20, 20, 171, 31))
         font = QtGui.QFont()
         font.setPointSize(11)
-        self.lblMesaP.setFont(font)
-        self.lblMesaP.setObjectName("lblMesaP")
-        self.lblDNIP = QtWidgets.QLabel(parent=self.pagePedido)
-        self.lblDNIP.setGeometry(QtCore.QRect(70, 120, 81, 16))
+        self.btnVolver.setFont(font)
+        self.btnVolver.setObjectName("btnVolver")
+        self.lblAtender = QtWidgets.QLabel(parent=self.pageResumen)
+        self.lblAtender.setGeometry(QtCore.QRect(220, 30, 151, 16))
         font = QtGui.QFont()
         font.setPointSize(11)
-        self.lblDNIP.setFont(font)
-        self.lblDNIP.setObjectName("lblDNIP")
-        self.lblProductoP = QtWidgets.QLabel(parent=self.pagePedido)
-        self.lblProductoP.setGeometry(QtCore.QRect(90, 150, 61, 16))
+        self.lblAtender.setFont(font)
+        self.lblAtender.setObjectName("lblAtender")
+        self.lblBuscarPlato = QtWidgets.QLabel(parent=self.pageResumen)
+        self.lblBuscarPlato.setGeometry(QtCore.QRect(30, 80, 161, 21))
         font = QtGui.QFont()
         font.setPointSize(11)
-        self.lblProductoP.setFont(font)
-        self.lblProductoP.setObjectName("lblProductoP")
-        self.lblCantidadP = QtWidgets.QLabel(parent=self.pagePedido)
-        self.lblCantidadP.setGeometry(QtCore.QRect(90, 180, 71, 20))
+        self.lblBuscarPlato.setFont(font)
+        self.lblBuscarPlato.setObjectName("lblBuscarPlato")
+        self.txtBuscar = QtWidgets.QLineEdit(parent=self.pageResumen)
+        self.txtBuscar.setGeometry(QtCore.QRect(190, 80, 181, 21))
         font = QtGui.QFont()
         font.setPointSize(11)
-        self.lblCantidadP.setFont(font)
-        self.lblCantidadP.setObjectName("lblCantidadP")
-        self.btnAgregarP = QtWidgets.QPushButton(parent=self.pagePedido)
-        self.btnAgregarP.setGeometry(QtCore.QRect(114, 230, 151, 31))
+        self.txtBuscar.setFont(font)
+        self.txtBuscar.setObjectName("txtBuscar")
+        self.lblCantidad = QtWidgets.QLabel(parent=self.pageResumen)
+        self.lblCantidad.setGeometry(QtCore.QRect(120, 120, 61, 20))
         font = QtGui.QFont()
         font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.btnAgregarP.setFont(font)
-        self.btnAgregarP.setStyleSheet("QPushButton {\n"
-"    background-color: #27AE60;\n"
-"    color: #FFFFFF;\n"
-"    border: none;\n"
-"    border-radius: 5px;\n"
-"    padding: 2px 8px;\n"
-"    font-weight: bold;\n"
-"    font-size: 11pt;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: #1E8449;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #145A32;\n"
-"}")
-        self.btnAgregarP.setObjectName("btnAgregarP")
-        self.txtDNIP = QtWidgets.QLineEdit(parent=self.pagePedido)
-        self.txtDNIP.setGeometry(QtCore.QRect(160, 120, 141, 20))
+        self.lblCantidad.setFont(font)
+        self.lblCantidad.setObjectName("lblCantidad")
+        self.btnAgregarPedido = QtWidgets.QPushButton(parent=self.pageResumen)
+        self.btnAgregarPedido.setGeometry(QtCore.QRect(110, 160, 141, 31))
         font = QtGui.QFont()
         font.setPointSize(11)
-        self.txtDNIP.setFont(font)
-        self.txtDNIP.setStyleSheet("background-color: #ffffff;\n"
-"")
-        self.txtDNIP.setObjectName("txtDNIP")
-        self.spinCantidadP = QtWidgets.QSpinBox(parent=self.pagePedido)
-        self.spinCantidadP.setGeometry(QtCore.QRect(160, 180, 81, 22))
-        self.spinCantidadP.setStyleSheet("background-color: #ffffff;\n"
-"")
-        self.spinCantidadP.setObjectName("spinCantidadP")
-        self.cmbProductoP = QtWidgets.QComboBox(parent=self.pagePedido)
-        self.cmbProductoP.setGeometry(QtCore.QRect(160, 150, 211, 22))
-        self.cmbProductoP.setStyleSheet("background-color: #ffffff;\n"
-"")
-        self.cmbProductoP.setObjectName("cmbProductoP")
-        self.tablePedidos = QtWidgets.QTableWidget(parent=self.pagePedido)
-        self.tablePedidos.setGeometry(QtCore.QRect(30, 270, 511, 192))
+        self.btnAgregarPedido.setFont(font)
+        self.btnAgregarPedido.setObjectName("btnAgregarPedido")
+        self.btnQuitar = QtWidgets.QPushButton(parent=self.pageResumen)
+        self.btnQuitar.setGeometry(QtCore.QRect(270, 160, 141, 31))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.btnQuitar.setFont(font)
+        self.btnQuitar.setObjectName("btnQuitar")
+        self.tablePedidos = QtWidgets.QTableWidget(parent=self.pageResumen)
+        self.tablePedidos.setGeometry(QtCore.QRect(20, 210, 671, 192))
         self.tablePedidos.setStyleSheet("QTableWidget {\n"
 "    background-color: #ffffff;\n"
 "    alternate-background-color: #f9f9f9;\n"
@@ -1844,165 +1864,39 @@ class Ui_MainWindow(object):
         self.tablePedidos.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.tablePedidos.setHorizontalHeaderItem(4, item)
+        self.tablePedidos.horizontalHeader().setDefaultSectionSize(124)
         self.tablePedidos.horizontalHeader().setStretchLastSection(True)
-        self.btnNuevoP = QtWidgets.QPushButton(parent=self.pagePedido)
-        self.btnNuevoP.setGeometry(QtCore.QRect(90, 490, 111, 31))
+        self.lblTotal = QtWidgets.QLabel(parent=self.pageResumen)
+        self.lblTotal.setGeometry(QtCore.QRect(550, 420, 141, 21))
         font = QtGui.QFont()
         font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.btnNuevoP.setFont(font)
-        self.btnNuevoP.setStyleSheet("QPushButton {\n"
-"    background-color: #2980B9;\n"
-"    color: #FFFFFF;\n"
-"    border: none;\n"
-"    border-radius: 5px;\n"
-"    padding: 2px 8px;\n"
-"    font-weight: bold;\n"
-"    font-size: 11pt;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: #1F618D;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #154360;\n"
-"}")
-        self.btnNuevoP.setObjectName("btnNuevoP")
-        self.btnGuardarP = QtWidgets.QPushButton(parent=self.pagePedido)
-        self.btnGuardarP.setGeometry(QtCore.QRect(220, 490, 121, 31))
+        self.lblTotal.setFont(font)
+        self.lblTotal.setObjectName("lblTotal")
+        self.btnEnviarCocina = QtWidgets.QPushButton(parent=self.pageResumen)
+        self.btnEnviarCocina.setGeometry(QtCore.QRect(50, 460, 131, 31))
         font = QtGui.QFont()
         font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.btnGuardarP.setFont(font)
-        self.btnGuardarP.setStyleSheet("QPushButton {\n"
-"    background-color: #27AE60;\n"
-"    color: #FFFFFF;\n"
-"    border: none;\n"
-"    border-radius: 5px;\n"
-"    padding: 2px 8px;\n"
-"    font-weight: bold;\n"
-"    font-size: 11pt;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: #1E8449;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #145A32;\n"
-"}")
-        self.btnGuardarP.setObjectName("btnGuardarP")
-        self.btnImprimirP = QtWidgets.QPushButton(parent=self.pagePedido)
-        self.btnImprimirP.setGeometry(QtCore.QRect(360, 490, 141, 31))
+        self.btnEnviarCocina.setFont(font)
+        self.btnEnviarCocina.setObjectName("btnEnviarCocina")
+        self.BtnPreCuenta = QtWidgets.QPushButton(parent=self.pageResumen)
+        self.BtnPreCuenta.setGeometry(QtCore.QRect(200, 460, 131, 31))
         font = QtGui.QFont()
         font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.btnImprimirP.setFont(font)
-        self.btnImprimirP.setStyleSheet("QPushButton {\n"
-"    background-color: #E67E22;\n"
-"    color: #FFFFFF;\n"
-"    border: none;\n"
-"    border-radius: 5px;\n"
-"    padding: 2px 8px;\n"
-"    font-weight: bold;\n"
-"    font-size: 11pt;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: #D35400;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #A04000;\n"
-"}")
-        self.btnImprimirP.setObjectName("btnImprimirP")
-        self.btnQuitarP = QtWidgets.QPushButton(parent=self.pagePedido)
-        self.btnQuitarP.setGeometry(QtCore.QRect(290, 230, 141, 31))
+        self.BtnPreCuenta.setFont(font)
+        self.BtnPreCuenta.setObjectName("BtnPreCuenta")
+        self.btnCobrar = QtWidgets.QPushButton(parent=self.pageResumen)
+        self.btnCobrar.setGeometry(QtCore.QRect(350, 460, 121, 31))
         font = QtGui.QFont()
         font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.btnQuitarP.setFont(font)
-        self.btnQuitarP.setStyleSheet("QPushButton {\n"
-"    background-color: #E74C3C;\n"
-"    color: #FFFFFF;\n"
-"    border: none;\n"
-"    border-radius: 5px;\n"
-"    padding: 2px 8px;\n"
-"    font-weight: bold;\n"
-"    font-size: 11pt;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: #C0392B;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #922B21;\n"
-"}")
-        self.btnQuitarP.setObjectName("btnQuitarP")
-        self.lblTotalP = QtWidgets.QLabel(parent=self.pagePedido)
-        self.lblTotalP.setGeometry(QtCore.QRect(580, 400, 161, 20))
+        self.btnCobrar.setFont(font)
+        self.btnCobrar.setObjectName("btnCobrar")
+        self.txtCantidad = QtWidgets.QLineEdit(parent=self.pageResumen)
+        self.txtCantidad.setGeometry(QtCore.QRect(190, 120, 181, 21))
         font = QtGui.QFont()
         font.setPointSize(11)
-        self.lblTotalP.setFont(font)
-        self.lblTotalP.setObjectName("lblTotalP")
-        self.txtTotalP = QtWidgets.QLineEdit(parent=self.pagePedido)
-        self.txtTotalP.setGeometry(QtCore.QRect(580, 440, 141, 20))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.txtTotalP.setFont(font)
-        self.txtTotalP.setStyleSheet("background-color: #ffffff;\n"
-"")
-        self.txtTotalP.setReadOnly(True)
-        self.txtTotalP.setObjectName("txtTotalP")
-        self.rbMesa1 = QtWidgets.QRadioButton(parent=self.pagePedido)
-        self.rbMesa1.setGeometry(QtCore.QRect(160, 50, 82, 17))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.rbMesa1.setFont(font)
-        self.rbMesa1.setObjectName("rbMesa1")
-        self.rbMesa2 = QtWidgets.QRadioButton(parent=self.pagePedido)
-        self.rbMesa2.setGeometry(QtCore.QRect(160, 80, 82, 17))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.rbMesa2.setFont(font)
-        self.rbMesa2.setObjectName("rbMesa2")
-        self.rbMesa3 = QtWidgets.QRadioButton(parent=self.pagePedido)
-        self.rbMesa3.setGeometry(QtCore.QRect(260, 50, 82, 17))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.rbMesa3.setFont(font)
-        self.rbMesa3.setObjectName("rbMesa3")
-        self.rbMesa4 = QtWidgets.QRadioButton(parent=self.pagePedido)
-        self.rbMesa4.setGeometry(QtCore.QRect(260, 80, 82, 17))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.rbMesa4.setFont(font)
-        self.rbMesa4.setObjectName("rbMesa4")
-        self.rbMesa5 = QtWidgets.QRadioButton(parent=self.pagePedido)
-        self.rbMesa5.setGeometry(QtCore.QRect(360, 50, 82, 17))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.rbMesa5.setFont(font)
-        self.rbMesa5.setObjectName("rbMesa5")
-        self.rbMesa6 = QtWidgets.QRadioButton(parent=self.pagePedido)
-        self.rbMesa6.setGeometry(QtCore.QRect(360, 80, 82, 17))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.rbMesa6.setFont(font)
-        self.rbMesa6.setObjectName("rbMesa6")
-        self.rbLlevar = QtWidgets.QRadioButton(parent=self.pagePedido)
-        self.rbLlevar.setGeometry(QtCore.QRect(470, 50, 82, 17))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.rbLlevar.setFont(font)
-        self.rbLlevar.setObjectName("rbLlevar")
-        self.StackedWidget.addWidget(self.pagePedido)
+        self.txtCantidad.setFont(font)
+        self.txtCantidad.setObjectName("txtCantidad")
+        self.StackedWidget.addWidget(self.pageResumen)
         self.pageReportes = QtWidgets.QWidget()
         self.pageReportes.setObjectName("pageReportes")
         self.lblReportes = QtWidgets.QLabel(parent=self.pageReportes)
@@ -2012,13 +1906,13 @@ class Ui_MainWindow(object):
         self.lblReportes.setFont(font)
         self.lblReportes.setObjectName("lblReportes")
         self.dtInicioR = QtWidgets.QDateEdit(parent=self.pageReportes)
-        self.dtInicioR.setGeometry(QtCore.QRect(160, 70, 110, 22))
+        self.dtInicioR.setGeometry(QtCore.QRect(160, 70, 151, 22))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.dtInicioR.setFont(font)
         self.dtInicioR.setObjectName("dtInicioR")
         self.dtFinR = QtWidgets.QDateEdit(parent=self.pageReportes)
-        self.dtFinR.setGeometry(QtCore.QRect(160, 100, 110, 22))
+        self.dtFinR.setGeometry(QtCore.QRect(160, 100, 151, 22))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.dtFinR.setFont(font)
@@ -2168,7 +2062,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.StackedWidget.setCurrentIndex(4)
+        self.StackedWidget.setCurrentIndex(6)
         self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -2334,12 +2228,33 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Precio Unitario"))
         item = self.tableInsumos.horizontalHeaderItem(6)
         item.setText(_translate("MainWindow", "Total"))
-        self.lblPedidos.setText(_translate("MainWindow", "Pedidos / Ventas"))
-        self.lblMesaP.setText(_translate("MainWindow", "Nro. de Mesa:"))
-        self.lblDNIP.setText(_translate("MainWindow", "DNI Cliente:"))
-        self.lblProductoP.setText(_translate("MainWindow", "Producto:"))
-        self.lblCantidadP.setText(_translate("MainWindow", "Cantidad:"))
-        self.btnAgregarP.setText(_translate("MainWindow", "Agregar"))
+        self.lblPedidos.setText(_translate("MainWindow", "SELECCIONAR MESA O TIPO DE PEDIDO"))
+        self.btnMesa1.setText(_translate("MainWindow", "MESA 01 \n"
+"LIBRE\n"
+"S/ 0.00"))
+        self.btnMesa2.setText(_translate("MainWindow", "MESA 02 \n"
+"LIBRE\n"
+"S/ 0.00"))
+        self.btnMesa3.setText(_translate("MainWindow", "MESA 03 \n"
+"LIBRE\n"
+"S/ 0.00"))
+        self.btnMesa4.setText(_translate("MainWindow", "MESA 04 \n"
+"LIBRE\n"
+"S/ 0.00"))
+        self.btnMesa5.setText(_translate("MainWindow", "MESA 05 \n"
+"LIBRE\n"
+"S/ 0.00"))
+        self.btnMesa6.setText(_translate("MainWindow", "MESA 06 \n"
+"LIBRE\n"
+"S/ 0.00"))
+        self.btnLlevar.setText(_translate("MainWindow", "PARA LLEVAR \n"
+"Activo"))
+        self.btnVolver.setText(_translate("MainWindow", "<--  Volver "))
+        self.lblAtender.setText(_translate("MainWindow", "Atendiendo: MESA 1 "))
+        self.lblBuscarPlato.setText(_translate("MainWindow", "Buscar Plato o Bebida:"))
+        self.lblCantidad.setText(_translate("MainWindow", "Cantidad: "))
+        self.btnAgregarPedido.setText(_translate("MainWindow", "Agregar Pedido"))
+        self.btnQuitar.setText(_translate("MainWindow", "Quitar Producto"))
         item = self.tablePedidos.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Codigo"))
         item = self.tablePedidos.horizontalHeaderItem(1)
@@ -2347,21 +2262,13 @@ class Ui_MainWindow(object):
         item = self.tablePedidos.horizontalHeaderItem(2)
         item.setText(_translate("MainWindow", "Cantidad"))
         item = self.tablePedidos.horizontalHeaderItem(3)
-        item.setText(_translate("MainWindow", "Precio Unitario"))
+        item.setText(_translate("MainWindow", "Pre. Unitario"))
         item = self.tablePedidos.horizontalHeaderItem(4)
-        item.setText(_translate("MainWindow", "Sub Total"))
-        self.btnNuevoP.setText(_translate("MainWindow", "Nuevo pedido"))
-        self.btnGuardarP.setText(_translate("MainWindow", "Guardar Venta"))
-        self.btnImprimirP.setText(_translate("MainWindow", "Imprimir ticket"))
-        self.btnQuitarP.setText(_translate("MainWindow", "Quitar producto"))
-        self.lblTotalP.setText(_translate("MainWindow", "TOTAL A PAGAR S/."))
-        self.rbMesa1.setText(_translate("MainWindow", "Mesa 1"))
-        self.rbMesa2.setText(_translate("MainWindow", "Mesa 2"))
-        self.rbMesa3.setText(_translate("MainWindow", "Mesa 3"))
-        self.rbMesa4.setText(_translate("MainWindow", "Mesa 4"))
-        self.rbMesa5.setText(_translate("MainWindow", "Mesa 5"))
-        self.rbMesa6.setText(_translate("MainWindow", "Mesa 6"))
-        self.rbLlevar.setText(_translate("MainWindow", "Llevar"))
+        item.setText(_translate("MainWindow", "SubTotal"))
+        self.lblTotal.setText(_translate("MainWindow", "TOTAL: S/ 00.00"))
+        self.btnEnviarCocina.setText(_translate("MainWindow", "Enviar a Cocina"))
+        self.BtnPreCuenta.setText(_translate("MainWindow", "Pre-Cuenta "))
+        self.btnCobrar.setText(_translate("MainWindow", "Cobrar"))
         self.lblReportes.setText(_translate("MainWindow", "Reportes Ventas e Historial"))
         self.lblFechaInicioR.setText(_translate("MainWindow", "Fecha Inicio:"))
         self.lblFechaFinR.setText(_translate("MainWindow", "Fecha Fin:"))
@@ -2383,13 +2290,3 @@ class Ui_MainWindow(object):
         self.lblTotalR.setText(_translate("MainWindow", "Total Recaudado S/. "))
         self.lblTitulo.setText(_translate("MainWindow", " SISTEMA DE GESTION DE RESTAURANTE SUMAQ ÑAN"))
         self.lblUsuario.setText(_translate("MainWindow", "  USUARIO: ADMINISTRADOR"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec())

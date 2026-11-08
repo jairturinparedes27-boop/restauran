@@ -27,6 +27,15 @@ python dev.py --rol Administrador # entra directo al panel (también Cajero o Mo
 
 Al guardar un `.ui` en Qt Designer, `dev.py` regenera su `ui_*.py`, salvo que desaparezca algún widget que el código pueda estar usando.
 
+## Pruebas
+
+```
+pip install -r requirements-dev.txt
+python -m pytest
+```
+
+Cada prueba usa una base de datos temporal (nunca toca `restaurante.db`) y la interfaz se crea sin mostrarse. Pasa las pruebas antes de subir cambios.
+
 ## Roles
 
 | Rol | Módulos |
@@ -39,4 +48,7 @@ Solo estos tres cargos pueden tener usuario. El rol de un usuario es el cargo de
 
 ## Ventas
 
-Cada cobro se guarda en las tablas `ventas` y `detalle_ventas` con fecha, método de pago, cliente y número correlativo (`B001-00000001` para boletas, `F001-00000001` para facturas). Los PDF se guardan en `boletas/` y `facturas/`.
+Cada cobro se guarda en las tablas `ventas` y `detalle_ventas` con fecha, método de pago, cliente, quién cobró y número correlativo (`B001-00000001` para boletas, `F001-00000001` para facturas). Los PDF se guardan en `boletas/` y `facturas/`.
+
+- **Inicio:** ventas y pedidos del día, platos disponibles, productos con 10 unidades o menos (e insumos bajo su mínimo), mesas abiertas y últimas ventas.
+- **Reportes:** ventas entre dos fechas con su total. Se exportan a Excel (hojas de ventas, productos vendidos y métodos de pago) o a PDF; por defecto se guardan en `reportes/`.
